@@ -1,4 +1,4 @@
-site_name: Promptly API Docs
+site_name: Orange Logic Demo Docs
 site_url: https://bicep.github.io/ol-demo
 theme:
   name: material
@@ -14,10 +14,6 @@ nav:
   - Quickstart: quickstart.md
   - API Reference:
       - Text Generation: reference/text-generation.md
-      - Image Generation: reference/image-generation.md
-      - Speech Generation: reference/speech-generation.md
-      - Subscriptions: reference/subscriptions.md
-  - Usage Tracking: usage-tracking.md
 markdown_extensions:
   - admonition
   - codehilite
