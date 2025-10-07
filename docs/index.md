@@ -12,8 +12,6 @@ Promptly is a generative AI SaaS platform that helps developers integrate advanc
 ## Quick Links
 - [Quickstart Guide](quickstart.md)
 - [API Reference](reference/text-generation.md)
-- [Usage Tracking](usage-tracking.md)
-- [Subscription Management](reference/subscriptions.md)
 
 ## API Architecture
 
@@ -30,7 +28,6 @@ flowchart TD
         B[Text Generation]
         C[Image Generation]
         D[Speech Generation]
-        E[Usage Tracking & Subscription Management]
     end
 
     subgraph Backend Services
@@ -93,4 +90,3 @@ sequenceDiagram
 
 1. Start with the [Quickstart Guide](quickstart.md) to make your first API call.  
 2. Explore the [API Reference](reference/text-generation.md) for detailed endpoints and parameters.  
-3. Learn how to [track your usage](usage-tracking.md) and manage limits.

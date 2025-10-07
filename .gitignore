@@ -1,0 +1,25 @@
+# Python environment
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+.env
+
+# MkDocs build artifacts
+/site/
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# GitHub Actions token files (if any local files store secrets)
+secrets.env

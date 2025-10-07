@@ -58,5 +58,3 @@ print(resp.json())
 > Tip: Adjust max_tokens to control the length of the generated text.
 
 Great! You've successfully generated your first piece of text. 🎉  
-
-To explore other capabilities, check out the [Image Generation](reference/image-generation.md) and [Speech Generation](reference/speech-generation.md) sections.
