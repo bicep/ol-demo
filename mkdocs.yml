@@ -1,0 +1,41 @@
+site_name: Promptly API Docs
+site_url: https://bicep.github.io/ol-demo
+theme:
+  name: material
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - mermaid 
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - API Reference:
+      - Text Generation: reference/text-generation.md
+      - Image Generation: reference/image-generation.md
+      - Speech Generation: reference/speech-generation.md
+      - Subscriptions: reference/subscriptions.md
+  - Usage Tracking: usage-tracking.md
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - attr_list
+  - def_list
+  - pymdownx.superfences
+  - pymdownx.extra:
+      pymdownx.superfences:
+        custom_fences:
+          - name: mermaid       # 🟨 Recognize ```mermaid blocks
+            class: mermaid      # 🟨 Add proper CSS class
+            format: !!python/name:pymdownx.superfences.fence_code_format  # 🟨 Use default formatter
+
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - pymdownx.details
+plugins:
+  - search
+  - mermaid2
