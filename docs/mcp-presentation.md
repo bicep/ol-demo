@@ -1,17 +1,29 @@
-# 🧠 Model Context Protocol Explained
-*A simple way to understand how AI tools communicate.*
+---
+marp: true
+theme: default
+paginate: true
+mermaid: true
+---
 
-???  "What is MCP?"
-    MCP is a protocol that allows AI models to communicate with external systems through standardized requests.
+# How do AI Tools Talk to Each Other?
 
-??? tip "Example Request"
-    ```
-    {
-      "type": "mcp.request",
-      "action": "send_email",
-      "data": { "to": "user@example.com" }
-    }
-    ```
+> Explaining the Model Context Protocol (MCP) simply
+
+---
+
+| ![image-1](image-1.png) | ![image-3](image-3.png) |
+|-------------------------|-------------------------|
+
+---
+
+
+# Understanding MCP
+
+> MCP is a protocol that allows AI models to communicate with external systems through standardized requests.
+
+---
+
+![alt text](image.png)
 
 ---
 
@@ -19,8 +31,6 @@
 If you forget everything else, remember this:
 
 > **MCP is like a USB port for AI tools — any tool can plug in, communicate in a standard way, and work immediately.**
-
-![alt text](image.png)
 
 ---
 
@@ -91,4 +101,3 @@ Every “plug in” request goes through the hub, ensuring devices communicate r
 
 ### Next Steps
 - [A Concrete Example →](a-concrete-example.md)  
-- [Why It Matters →](why-it-matters.md)
