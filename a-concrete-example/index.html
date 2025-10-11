@@ -5,10 +5,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://bicep.github.io/ol-demo/quickstart/" rel="canonical"/>
+<link href="https://bicep.github.io/ol-demo/a-concrete-example/" rel="canonical"/>
+<link href="../mcp-presentation.html" rel="prev"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.21" name="generator"/>
-<title>Quick Start Guide - Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other</title>
+<title>A Concrete Example - Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other</title>
 <link href="../assets/stylesheets/main.2a3383ac.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +22,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#quick-start-guide">
+<a class="md-skip" href="#example-using-mcp-with-gmail">
           Skip to content
         </a>
 </div>
@@ -45,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Quick Start Guide
+              A Concrete Example
             
           </span>
 </div>
@@ -120,8 +121,8 @@
 
       </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../a-concrete-example/">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="./">
         
   
   
@@ -171,13 +172,57 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../a-concrete-example/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    A Concrete Example
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     A Concrete Example
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scenario">
+<span class="md-ellipsis">
+      🧠 Scenario
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data-flow">
+<span class="md-ellipsis">
+      🔄 Data Flow
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-mcp-request">
+<span class="md-ellipsis">
+      🧰 Example MCP Request
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      🔍 Summary
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -194,36 +239,32 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#step-1-install-dependencies">
+<a class="md-nav__link" href="#scenario">
 <span class="md-ellipsis">
-      Step 1: Install Dependencies
+      🧠 Scenario
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#step-2-create-an-account-and-get-your-api-key">
+<a class="md-nav__link" href="#data-flow">
 <span class="md-ellipsis">
-      Step 2: Create an Account and Get Your API Key
+      🔄 Data Flow
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#step-3-generate-text">
+<a class="md-nav__link" href="#example-mcp-request">
 <span class="md-ellipsis">
-      Step 3: Generate Text
-    </span>
-</a>
-<nav aria-label="Step 3: Generate Text" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-response">
-<span class="md-ellipsis">
-      Example Response
+      🧰 Example MCP Request
     </span>
 </a>
 </li>
-</ul>
-</nav>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+<span class="md-ellipsis">
+      🔍 Summary
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -232,53 +273,95 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="quick-start-guide">Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permanent link">¶</a></h1>
-<p>Get up and running with the Promptly API in just a few steps.</p>
+<h1 id="example-using-mcp-with-gmail">📩 Example: Using MCP with Gmail<a class="headerlink" href="#example-using-mcp-with-gmail" title="Permanent link">¶</a></h1>
+<p>This example shows how the <strong>Model Context Protocol (MCP)</strong> works in practice — connecting an <strong>LLM (host)</strong> with an external <strong>tool (server)</strong> such as <strong>Gmail</strong> through an <strong>MCP client</strong>.</p>
 <hr/>
-<h2 id="step-1-install-dependencies">Step 1: Install Dependencies<a class="headerlink" href="#step-1-install-dependencies" title="Permanent link">¶</a></h2>
-<p>Make sure you have Python 3.7+ installed, then install <code>requests</code>:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>requests
-</code></pre></div>
+<h2 id="scenario">🧠 Scenario<a class="headerlink" href="#scenario" title="Permanent link">¶</a></h2>
+<p>You’re using ChatGPT (the <strong>MCP Host</strong>) and say:</p>
 <blockquote>
-<p>Tip: You can also use curl or any HTTP client if you prefer not to use Python.</p>
+<p>“Send an email to Alice with the report attached.”</p>
 </blockquote>
-<h2 id="step-2-create-an-account-and-get-your-api-key">Step 2: Create an Account and Get Your API Key<a class="headerlink" href="#step-2-create-an-account-and-get-your-api-key" title="Permanent link">¶</a></h2>
-<p>Sign up at https://promptly.ai/signup</p>
-<blockquote>
-<p>Keep your API key secure! Never commit it to public repositories.</p>
-</blockquote>
-<h2 id="step-3-generate-text">Step 3: Generate Text<a class="headerlink" href="#step-3-generate-text" title="Permanent link">¶</a></h2>
-<p>Use the /v1/generate/text endpoint to gen</p>
-<div class="highlight"><pre><span></span><code>import requests
+<p>Behind the scenes, this request travels through the <strong>MCP stack</strong> like this:</p>
+<ol>
+<li>
+<p><strong>MCP Host (LLM):</strong><br/>
+   Understands your intent and prepares to perform an external action.</p>
+</li>
+<li>
+<p><strong>MCP Client:</strong><br/>
+   Converts that intent into a <strong>structured MCP request</strong> the tool can understand.</p>
+</li>
+<li>
+<p><strong>MCP Server (Gmail):</strong><br/>
+   Receives the request, executes it (sending the email), and returns a response.</p>
+</li>
+</ol>
+<hr/>
+<h2 id="data-flow">🔄 Data Flow<a class="headerlink" href="#data-flow" title="Permanent link">¶</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant U as User
+    participant H as MCP Host (LLM)
+    participant C as MCP Client
+    participant G as MCP Server (Gmail)
 
-# Endpoint and headers
-url = "https://api.promptly.ai/v1/generate/text"
-headers = {
-    "Authorization": "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json"
-}
-
-# Request payload
-data = {
-    "model": "promptly-gpt-3",
-    "prompt": "Write a haiku about AI",
-    "max_tokens": 50
-}
-
-# Send request
-resp = requests.post(url, headers=headers, json=data)
-print(resp.json())
+    U-&gt;&gt;H: "Send an email to Alice with the report"
+    H-&gt;&gt;C: Generate MCP request
+    C-&gt;&gt;G: JSON-RPC call (send_email)
+    G--&gt;&gt;C: Response: "Email sent"
+    C--&gt;&gt;H: Return structured result
+    H--&gt;&gt;U: "Email sent to Alice."</code></pre>
+<h2 id="example-mcp-request">🧰 Example MCP Request<a class="headerlink" href="#example-mcp-request" title="Permanent link">¶</a></h2>
+<p>The <strong>MCP Client</strong> might send a request like this:</p>
+<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"request"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gmail"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"send_email"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alice@example.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monthly Report"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi Alice, see attached."</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<h4 id="example-response">Example Response<a class="headerlink" href="#example-response" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code>{
-  "id": "txt-001",
-  "text": "Machines learn and grow,\nSilent algorithms hum,\nWisdom blooms in code."
-}
-</code></pre></div>
-<blockquote>
-<p>Tip: Adjust max_tokens to control the length of the generated text.</p>
-</blockquote>
-<p>Great! You've successfully generated your first piece of text. 🎉  </p>
+And the MCP Server could respond with:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"response"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email sent successfully."</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="summary">🔍 Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MCP Host</strong></td>
+<td>Runs the model</td>
+<td>ChatGPT / OpenAI API</td>
+</tr>
+<tr>
+<td><strong>MCP Client</strong></td>
+<td>Translates requests</td>
+<td>OpenAI’s internal connector</td>
+</tr>
+<tr>
+<td><strong>MCP Server</strong></td>
+<td>Executes tasks</td>
+<td>Gmail API wrapped in MCP interface</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Standardize communication between LLMs and tools</td>
+<td>Send email, fetch data, trigger workflows</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>

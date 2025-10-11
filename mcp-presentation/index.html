@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://bicep.github.io/ol-demo/quickstart/" rel="canonical"/>
+<link href="https://bicep.github.io/ol-demo/mcp-presentation/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.21" name="generator"/>
-<title>Quick Start Guide - Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other</title>
+<title>How do AI Tools Talk to Each Other? - Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other</title>
 <link href="../assets/stylesheets/main.2a3383ac.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#quick-start-guide">
+<a class="md-skip" href="#how-do-ai-tools-talk-to-each-other">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Quick Start Guide
+              How do AI Tools Talk to Each Other?
             
           </span>
 </div>
@@ -188,97 +188,122 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#step-1-install-dependencies">
-<span class="md-ellipsis">
-      Step 1: Install Dependencies
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#step-2-create-an-account-and-get-your-api-key">
-<span class="md-ellipsis">
-      Step 2: Create an Account and Get Your API Key
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#step-3-generate-text">
-<span class="md-ellipsis">
-      Step 3: Generate Text
-    </span>
-</a>
-<nav aria-label="Step 3: Generate Text" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-response">
-<span class="md-ellipsis">
-      Example Response
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="quick-start-guide">Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permanent link">¶</a></h1>
-<p>Get up and running with the Promptly API in just a few steps.</p>
+<h1 id="how-do-ai-tools-talk-to-each-other">How do AI Tools Talk to Each Other?<a class="headerlink" href="#how-do-ai-tools-talk-to-each-other" title="Permanent link">¶</a></h1>
+<blockquote>
+<p>Explaining the Model Context Protocol (MCP) simply</p>
+</blockquote>
 <hr/>
-<h2 id="step-1-install-dependencies">Step 1: Install Dependencies<a class="headerlink" href="#step-1-install-dependencies" title="Permanent link">¶</a></h2>
-<p>Make sure you have Python 3.7+ installed, then install <code>requests</code>:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>requests
-</code></pre></div>
+<table>
+<thead>
+<tr>
+<th><img alt="image-1" src="../image-1.png"/></th>
+<th><img alt="image-3" src="../image-3.png"/></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
 <blockquote>
-<p>Tip: You can also use curl or any HTTP client if you prefer not to use Python.</p>
+<p>MCP is a protocol that allows AI models to communicate with external systems through standardized requests.</p>
 </blockquote>
-<h2 id="step-2-create-an-account-and-get-your-api-key">Step 2: Create an Account and Get Your API Key<a class="headerlink" href="#step-2-create-an-account-and-get-your-api-key" title="Permanent link">¶</a></h2>
-<p>Sign up at https://promptly.ai/signup</p>
+<hr/>
+<p><img alt="alt text" src="../image.png"/></p>
+<hr/>
+<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
+<p>If you forget everything else, remember this:</p>
 <blockquote>
-<p>Keep your API key secure! Never commit it to public repositories.</p>
+<p><strong>MCP is like a USB port for AI tools — any tool can plug in, communicate in a standard way, and work immediately.</strong></p>
 </blockquote>
-<h2 id="step-3-generate-text">Step 3: Generate Text<a class="headerlink" href="#step-3-generate-text" title="Permanent link">¶</a></h2>
-<p>Use the /v1/generate/text endpoint to gen</p>
-<div class="highlight"><pre><span></span><code>import requests
-
-# Endpoint and headers
-url = "https://api.promptly.ai/v1/generate/text"
-headers = {
-    "Authorization": "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json"
-}
-
-# Request payload
-data = {
-    "model": "promptly-gpt-3",
-    "prompt": "Write a haiku about AI",
-    "max_tokens": 50
-}
-
-# Send request
-resp = requests.post(url, headers=headers, json=data)
-print(resp.json())
-</code></pre></div>
-<h4 id="example-response">Example Response<a class="headerlink" href="#example-response" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code>{
-  "id": "txt-001",
-  "text": "Machines learn and grow,\nSilent algorithms hum,\nWisdom blooms in code."
-}
-</code></pre></div>
+<hr/>
+<h2 id="1-the-problem-it-solves">1️⃣ The Problem It Solves<a class="headerlink" href="#1-the-problem-it-solves" title="Permanent link">¶</a></h2>
+<p>Modern AI tools often act in isolation — each with their own APIs and context limits.<br/>
+This leads to duplication, inconsistency, and limited cooperation between systems.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Model
+    participant ToolA
+    participant ToolB
+    Model-&gt;&gt;ToolA: Custom API call
+    Model-&gt;&gt;ToolB: Custom API call</code></pre>
+<p>Without a standard, every connection is a separate cable — fragile and error-prone.</p>
+<h2 id="2-the-core-concept">2️⃣ The Core Concept<a class="headerlink" href="#2-the-core-concept" title="Permanent link">¶</a></h2>
+<p>At its heart, MCP defines a shared protocol for models, tools, and clients.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[AI Model] --&gt;|Request| B[MCP Server]
+    B --&gt;|Invoke| C[Tool 1]
+    B --&gt;|Invoke| D[Tool 2]
+    C --&gt; B
+    D --&gt; B
+    B --&gt;|Return| A</code></pre>
 <blockquote>
-<p>Tip: Adjust max_tokens to control the length of the generated text.</p>
+<p>The MCP server acts as a universal connector, handling requests and responses in a standard format.</p>
 </blockquote>
-<p>Great! You've successfully generated your first piece of text. 🎉  </p>
+<h2 id="3-analogy-in-action">3️⃣ Analogy in Action<a class="headerlink" href="#3-analogy-in-action" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>AI Model</strong> = the device (e.g., laptop)  </li>
+<li><strong>MCP Server</strong> = the USB hub / port  </li>
+<li><strong>Tools</strong> = external devices (e.g., keyboard, mouse, hard drive)  </li>
+</ul>
+<p>Every “plug in” request goes through the hub, ensuring devices communicate reliably.</p>
+<hr/>
+<h2 id="4-what-makes-mcp-different">4️⃣ What Makes MCP Different<a class="headerlink" href="#4-what-makes-mcp-different" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Traditional API</th>
+<th>Model Context Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Communication</td>
+<td>One-to-one</td>
+<td>Many-to-many</td>
+</tr>
+<tr>
+<td>Context awareness</td>
+<td>Local only</td>
+<td>Shared and global</td>
+</tr>
+<tr>
+<td>Extensibility</td>
+<td>Manual integration</td>
+<td>Automatic tool discovery</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="5-quick-example">5️⃣ Quick Example<a class="headerlink" href="#5-quick-example" title="Permanent link">¶</a></h2>
+<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"request"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_weather"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singapore"</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+- MCP interprets the request.
+- Routes it to the correct tool.
+- Merges the result back into the model’s context seamlessly.</p>
+<h2 id="tldr">✅ TL;DR<a class="headerlink" href="#tldr" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>MCP is like a <strong>USB port for AI tools</strong> — plug in any tool, communicate using a standard language, and it just works.</p>
+</blockquote>
+<hr/>
+<h3 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="../a-concrete-example/">A Concrete Example →</a> </li>
+</ul>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
