@@ -51,44 +51,43 @@ If you forget everything else, remember this:
 
 ---
 
-## 1️⃣ The Problem MCP is trying to Solve
+## 1️⃣ The Problem
 Modern AI tools often act in isolation — each with their own APIs and context limits.  
-This leads to duplication, inconsistency, and limited cooperation between systems.
 
 <div class="mermaid">
 sequenceDiagram
     participant Model
     participant ToolA
     participant ToolB
-    Model->>ToolA: Custom API call
-    Model->>ToolB: Custom API call
+    Model->>ToolA: Custom API call for Tool A (different format)
+    Model->>ToolB: Custom API call for Tool B (different format)
 </div>
-
-Without a standard, every connection is a separate cable — fragile and error-prone.
 
 ---
 
-## 2️⃣ The Core Concept
+## 2️⃣ How MCP Solves the Problem
 
 At its heart, MCP defines a shared protocol for how large language models communicate with its tools
 
 <div class="mermaid">
-flowchart TD
-    A[AI Model] -->|Request| B[MCP Server]
-    B -->|Invoke| C[Tool 1]
-    B -->|Invoke| D[Tool 2]
-    C --> B
-    D --> B
-    B -->|Return| A
+sequenceDiagram
+    participant Model
+    participant MCPServer
+    participant Tool1
+    participant Tool2
+    Model->>MCPServer: Standardized request
+    MCPServer->>Tool1: Invoke Tool1
+    MCPServer->>Tool2: Invoke Tool2
+    Tool1-->>MCPServer: Response
+    Tool2-->>MCPServer: Response
+    MCPServer-->>Model: Standardized response
 </div>
-
-> The MCP server acts as a universal connector, handling requests and responses in a standard format.
 
 ---
 
 ## 3️⃣ MCP Architecture: Client & Server
 
-> MCP has three main components: **Host (AI model)**, **Client**, and **Server (Tool)**.  
+> MCP has three main components: **Host (LLM)**, **Client**, and **Server (Tool)**.  
 
 ---
 
@@ -114,9 +113,9 @@ flowchart LR
 
 ---
 
-## 4️⃣ Concrete Example: Sending an Email
+## 4️⃣ Concrete Example: Setting a Reminder
 
-> Imagine your AI wants to send an email via Gmail.
+> Imagine your AI wants to set a reminder for you via Google Calendar.
 
 <div class="mermaid">
 sequenceDiagram
@@ -124,20 +123,16 @@ sequenceDiagram
     participant Host
     participant Client
     participant Server
-    participant Gmail
-    User->>Host: "Send email to Alice with report"
+    participant GCalendar
+    User->>Host: "Set a reminder for 10 AM tomorrow"
     Host->>Client: Generate MCP request
-    Client->>Server: send_email request (to: Alice, body: report)
-    Server->>Gmail: Execute send email
-    Gmail-->>Server: Email sent
+    Client->>Server: create_event request (time: 10 AM, title: reminder)
+    Server->>GCalendar: Execute create event
+    GCalendar-->>Server: Event created
     Server->>Client: Success response
     Client->>Host: Return structured result
-    Host->>User: Email sent confirmation
+    Host->>User: "Reminder set for 10 AM tomorrow."
 </div>
-
-
-- The AI never talks directly to Gmail — it goes through **MCP Client & Server**.  
-- Any tool (Slack, Google Docs, etc.) can be plugged in using the same pattern.  
 
 ---
 
@@ -146,8 +141,12 @@ sequenceDiagram
 
 | Use Case | How MCP Applies | MCP Components Involved |
 |----------|----------------|------------------------|
-| **📩 Automating Email** | AI sends, schedules, or drafts emails through Gmail | Host (LLM) → Client → Gmail Server |
-| **📊 Generating Reports** | AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports | Host → Client → Tool Servers (Sheets, DBs) |
-| **💬 Managing Chatbots** | AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly | Host → Client → Chat Platforms Servers |
+| **📩 Automating Email** | AI sends, schedules, or drafts emails through Gmail | Host (LLM) → Client → Gmail MCP Server |
+| **📊 Generating Reports** | AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports | Host → Client → Tool MCP Servers (Sheets, DBs) |
+| **💬 Managing Chatbots** | AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly | Host → Client → Chat Platforms MCP Servers |
 
-> We’ll go into detail on [**email automation**](example.md), which demonstrates the full MCP flow in a simple example.
+---
+
+## 5️⃣ What's next?
+
+> We’ll go into detail on [**email automation**](example), which demonstrates the full MCP flow in a simple example.
