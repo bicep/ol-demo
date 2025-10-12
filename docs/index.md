@@ -1,94 +1,10 @@
 # 🧠 Model Context Protocol Explained
-*A simple way to understand how AI tools communicate.*
+| ![MCP analogy](image.png) | 
+|:--:| 
+| *The USB-C analogy of MCP (Image: [Norah Sakal](https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/))* |
 
-???  "What is MCP?"
-    MCP is a protocol that allows AI models to communicate with external systems through standardized requests.
+Since Claude [announced the inception of Model Context Protocol (MCP) in November 2024](https://www.anthropic.com/news/model-context-protocol), there’s been a lot of buzz in the AI and developer communities.
 
-??? tip "Example Request"
-    ```
-    {
-      "type": "mcp.request",
-      "action": "send_email",
-      "data": { "to": "user@example.com" }
-    }
-    ```
+Today, I’ll attempt to explain MCP in simple terms, so that by the end, you’ll understand not just what it does, but why it’s exciting. We’ll cover the basic components, how a request flows from an AI model to a tool, and why this standardization could be a game-changer for developers and users alike.
 
----
-
-## 🎯 The Core Idea
-If you forget everything else, remember this:
-
-> **MCP is like a USB port for AI tools — any tool can plug in, communicate in a standard way, and work immediately.**
-
-![alt text](image.png)
-
----
-
-## 1️⃣ The Problem It Solves
-Modern AI tools often act in isolation — each with their own APIs and context limits.  
-This leads to duplication, inconsistency, and limited cooperation between systems.
-
-```mermaid
-sequenceDiagram
-    participant Model
-    participant ToolA
-    participant ToolB
-    Model->>ToolA: Custom API call
-    Model->>ToolB: Custom API call
-```
-
-Without a standard, every connection is a separate cable — fragile and error-prone.
-
-## 2️⃣ The Core Concept
-
-At its heart, MCP defines a shared protocol for models, tools, and clients.
-
-```mermaid
-flowchart TD
-    A[AI Model] -->|Request| B[MCP Server]
-    B -->|Invoke| C[Tool 1]
-    B -->|Invoke| D[Tool 2]
-    C --> B
-    D --> B
-    B -->|Return| A
-```
-> The MCP server acts as a universal connector, handling requests and responses in a standard format.
-
-## 3️⃣ Analogy in Action
-- **AI Model** = the device (e.g., laptop)  
-- **MCP Server** = the USB hub / port  
-- **Tools** = external devices (e.g., keyboard, mouse, hard drive)  
-
-Every “plug in” request goes through the hub, ensuring devices communicate reliably.
-
----
-
-## 4️⃣ What Makes MCP Different
-| Feature | Traditional API | Model Context Protocol |
-|----------|----------------|------------------------|
-| Communication | One-to-one | Many-to-many |
-| Context awareness | Local only | Shared and global |
-| Extensibility | Manual integration | Automatic tool discovery |
-
----
-
-## 5️⃣ Quick Example
-```json
-{
-  "type": "request",
-  "method": "get_weather",
-  "params": {"city": "Singapore"}
-}
-```
-- MCP interprets the request.
-- Routes it to the correct tool.
-- Merges the result back into the model’s context seamlessly.
-
-## ✅ TL;DR
-> MCP is like a **USB port for AI tools** — plug in any tool, communicate using a standard language, and it just works.
-
----
-
-### Next Steps
-- [A Concrete Example →](a-concrete-example.md)  
-- [Why It Matters →](why-it-matters.md)
+Learn more about me on the [About Me](about.md) page, or dive straight into the [Presentation](presentation.md) and [Example](example.md).

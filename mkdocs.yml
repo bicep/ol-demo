@@ -1,4 +1,4 @@
-site_name: Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other
+site_name: How Does AI Talk to Its Tools?
 site_url: https://bicep.github.io/ol-demo
 theme:
   name: material
@@ -13,7 +13,7 @@ nav:
   - Home: index.md
   - About me: about-me.md
   - Presentation: mcp-presentation.html
-  - A Concrete Example: a-concrete-example.md
+  - Example: example.md
 markdown_extensions:
   - admonition
   - codehilite

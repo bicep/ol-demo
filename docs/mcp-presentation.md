@@ -2,10 +2,28 @@
 marp: true
 theme: default
 paginate: true
-mermaid: true
 ---
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
 
-# How do AI Tools Talk to Each Other?
+
+<style>
+p > img { 
+    display: block;           /* 🟨 Makes the image take its own line */
+    margin-left: auto;        /* 🟨 Push image to center horizontally */
+    margin-right: auto;       /* 🟨 Push image to center horizontally */
+}
+.mermaid {
+    display: flex;              /* 🟨 Enable flexbox */
+    justify-content: center;    /* 🟨 Center horizontally */
+    align-items: center;        /* 🟨 Center vertically (optional) */
+}
+</style>
+
+
+# How Does AI Talk to Its Tools?
 
 > Explaining the Model Context Protocol (MCP) simply
 
@@ -16,13 +34,6 @@ mermaid: true
 
 ---
 
-
-# Understanding MCP
-
-> MCP is a protocol that allows AI models to communicate with external systems through standardized requests.
-
----
-
 ![alt text](image.png)
 
 ---
@@ -30,30 +41,38 @@ mermaid: true
 ## 🎯 The Core Idea
 If you forget everything else, remember this:
 
-> **MCP is like a USB port for AI tools — any tool can plug in, communicate in a standard way, and work immediately.**
+> **Think of MCP as a universal docking station for AI models. It lets LLMs connect to any tool — Gmail, Slack, Figma, you name it — through a single, standardized protocol.**
 
 ---
 
-## 1️⃣ The Problem It Solves
+# Understanding MCP
+
+> MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
+
+---
+
+## 1️⃣ The Problem MCP is trying to Solve
 Modern AI tools often act in isolation — each with their own APIs and context limits.  
 This leads to duplication, inconsistency, and limited cooperation between systems.
 
-```mermaid
+<div class="mermaid">
 sequenceDiagram
     participant Model
     participant ToolA
     participant ToolB
     Model->>ToolA: Custom API call
     Model->>ToolB: Custom API call
-```
+</div>
 
 Without a standard, every connection is a separate cable — fragile and error-prone.
 
+---
+
 ## 2️⃣ The Core Concept
 
-At its heart, MCP defines a shared protocol for models, tools, and clients.
+At its heart, MCP defines a shared protocol for how large language models communicate with its tools
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A[AI Model] -->|Request| B[MCP Server]
     B -->|Invoke| C[Tool 1]
@@ -61,43 +80,74 @@ flowchart TD
     C --> B
     D --> B
     B -->|Return| A
-```
+</div>
+
 > The MCP server acts as a universal connector, handling requests and responses in a standard format.
 
-## 3️⃣ Analogy in Action
-- **AI Model** = the device (e.g., laptop)  
-- **MCP Server** = the USB hub / port  
-- **Tools** = external devices (e.g., keyboard, mouse, hard drive)  
+---
 
-Every “plug in” request goes through the hub, ensuring devices communicate reliably.
+## 3️⃣ MCP Architecture: Client & Server
+
+> MCP has three main components: **Host (AI model)**, **Client**, and **Server (Tool)**.  
 
 ---
 
-## 4️⃣ What Makes MCP Different
-| Feature | Traditional API | Model Context Protocol |
+| ![MCP Architecture](image-5.png)| 
+|:--:| 
+| *MCP Architecture (Image: [Kashish Hora](https://mcpcat.io/blog/mcp-server-client-host/))* |
+
+---
+
+<div class="mermaid">
+flowchart LR
+    A[AI Model / Host] -->|Sends Intent| B[MCP Client]
+    B -->|Standardized MCP Request| C[MCP Server]
+    C -->|Executes Action| D[External Tool]
+    D --> C
+    C -->|Standardized Response| B
+    B -->|Delivers Result| A
+</div>
+
+- **Host / Model**: Knows what it wants to do (e.g., send an email).  
+- **Client**: Converts intent into an MCP request the server can understand.  
+- **Server**: Executes the request on the tool and sends back a standard response.  
+
+---
+
+## 4️⃣ Concrete Example: Sending an Email
+
+> Imagine your AI wants to send an email via Gmail.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant Host
+    participant Client
+    participant Server
+    participant Gmail
+    User->>Host: "Send email to Alice with report"
+    Host->>Client: Generate MCP request
+    Client->>Server: send_email request (to: Alice, body: report)
+    Server->>Gmail: Execute send email
+    Gmail-->>Server: Email sent
+    Server->>Client: Success response
+    Client->>Host: Return structured result
+    Host->>User: Email sent confirmation
+</div>
+
+
+- The AI never talks directly to Gmail — it goes through **MCP Client & Server**.  
+- Any tool (Slack, Google Docs, etc.) can be plugged in using the same pattern.  
+
+---
+
+## 5️⃣ Why This Matters: Product Use Cases
+
+
+| Use Case | How MCP Applies | MCP Components Involved |
 |----------|----------------|------------------------|
-| Communication | One-to-one | Many-to-many |
-| Context awareness | Local only | Shared and global |
-| Extensibility | Manual integration | Automatic tool discovery |
+| **📩 Automating Email** | AI sends, schedules, or drafts emails through Gmail | Host (LLM) → Client → Gmail Server |
+| **📊 Generating Reports** | AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports | Host → Client → Tool Servers (Sheets, DBs) |
+| **💬 Managing Chatbots** | AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly | Host → Client → Chat Platforms Servers |
 
----
-
-## 5️⃣ Quick Example
-```json
-{
-  "type": "request",
-  "method": "get_weather",
-  "params": {"city": "Singapore"}
-}
-```
-- MCP interprets the request.
-- Routes it to the correct tool.
-- Merges the result back into the model’s context seamlessly.
-
-## ✅ TL;DR
-> MCP is like a **USB port for AI tools** — plug in any tool, communicate using a standard language, and it just works.
-
----
-
-### Next Steps
-- [A Concrete Example →](a-concrete-example.md)  
+> We’ll go into detail on [**email automation**](example.md), which demonstrates the full MCP flow in a simple example.
