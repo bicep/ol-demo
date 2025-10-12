@@ -6,9 +6,29 @@ This example demonstrates how MCP works **end-to-end**, including how an LLM tra
 
 ---
 
-## A quick note on JSON-RPC
+## A Quick Note on JSON-RPC
 
-Most of agentic communications take place using the communications protocol JSON RPC; It is just a way of formatting requests and responses.
+Before diving deeper, it helps to understand the format that powers most MCP communications: **JSON-RPC**.
+
+It’s a lightweight, standardized way for two systems to talk — one sends a **request** (usually containing a `method` and some `params`), and the other sends back a **response** (with either a `result` or an `error`).
+
+Think of it as a **common language for function calls over JSON** — no custom API formats, just a consistent structure every time.
+
+---
+
+??? "Example Request"
+    ```json
+    {
+      "jsonrpc": "2.0",
+      "id": "42",
+      "method": "send_email",
+      "params": {
+        "to": "alice@example.com",
+        "subject": "Hello",
+        "body": "How are you?"
+      }
+    }
+    ```
 
 ---
 
@@ -24,6 +44,32 @@ User says:
 User gets back a response:
 
 > "Done! I have sent the email to Alice using your gmail account."
+
+---
+
+## Detailed Data Flow
+
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant H as MCP Host (LLM)
+  participant C as MCP Client
+  participant S as MCP Server
+  participant G as Gmail API
+  U->>H: "Send an email to Alice with report attached"
+  H->>C: Ask available tools (get_capabilities)
+  C->>S: Request list of tools
+  S-->>C: Returns available tools (e.g. gmail.send_email)
+  C-->>H: Tool metadata returned
+  H->>H: Parse intent → identify action & parameters
+  H->>C: MCP request JSON (tool: gmail, method: send_email, params {...})
+  C->>S: Send JSON-RPC request
+  S->>G: Map MCP → Gmail API call (POST /messages/send)
+  G-->>S: Gmail HTTP Response (200 OK / error)
+  S->>C: Convert Gmail response → MCP JSON-RPC response
+  C->>H: Return structured result
+  H->>U: "Email sent successfully."
+```
 
 ---
 
@@ -62,35 +108,65 @@ We want to show **everything that happens behind the scenes**:
 
 ---
 
-## Detailed Data Flow
+## Step 0: Tool Discovery (Handshake)
 
-```mermaid
-sequenceDiagram
-  participant U as User
-  participant H as MCP Host (LLM)
-  participant C as MCP Client
-  participant S as MCP Server
-  participant G as Gmail API
-  U->>H: "Send an email to Alice with report attached"
-  H->>C: Ask available tools (get_capabilities)
-  C->>S: Request list of tools
-  S-->>C: Returns available tools (e.g. gmail.send_email)
-  C-->>H: Tool metadata returned
-  H->>H: Parse intent → identify action & parameters
-  H->>C: MCP request JSON (tool: gmail, method: send_email, params {...})
-  C->>S: Send JSON-RPC request
-  S->>G: Map MCP → Gmail API call (POST /messages/send)
-  G-->>S: Gmail HTTP Response (200 OK / error)
-  S->>C: Convert Gmail response → MCP JSON-RPC response
-  C->>H: Return structured result
-  H->>U: "Email sent successfully."
-```
+Before any request is made, the **MCP Client** asks the **MCP Server** what tools and methods are available.
+
+??? example "Capability Discovery Request"
+    ```json
+    {
+      "jsonrpc": "2.0",
+      "id": "cap_001",
+      "method": "get_capabilities"
+    }
+    ```
+
+??? example "Capability Discovery Response"
+    ```json
+    {
+      "jsonrpc": "2.0",
+      "id": "cap_001",
+      "result": {
+        "tools": [
+          {
+            "name": "gmail",
+            "methods": ["send_email", "list_threads", "read_message"]
+          }
+        ]
+      }
+    }
+    ```
+
+🟨 *This handshake allows the host (LLM) to know which tools exist and what parameters each supports.*
 
 ---
 
-## Example MCP Request (JSON-RPC)
+## Step 1: Intent Parsing (MCP Host / LLM)
 
-??? "MCP Request (JSON-RPC)"
+The **LLM (Host)** interprets the user’s natural language and converts it into a structured intent.
+
+> “Send an email to Alice with the report attached.”
+
+??? "LLM output (conceptually)"
+    ```json
+    {
+      "tool": "gmail",
+      "method": "send_email",
+      "params": {
+        "to": "alice@example.com",
+        "subject": "Monthly Report",
+        "body": "Hi Alice, see attached.",
+        "attachments": ["report.pdf"]
+      }
+    }
+    ```
+> This prepares the request for translation into the MCP JSON-RPC standard.
+
+## Step 2 — MCP Client Translation
+
+The **MCP Client** now converts the LLM’s structured intent into a standardized **MCP JSON-RPC** request that any MCP-compliant server can understand.
+
+??? example "MCP Request (JSON-RPC)"
     ```json
     {
       "jsonrpc": "2.0",
@@ -111,16 +187,19 @@ sequenceDiagram
     }
     ```
 
-Key points:
-
+**Key points:**
 - `jsonrpc: "2.0"` → standard JSON-RPC 2.0 format.
-- `id` → unique request ID for matching response.
-- Attachments encoded in Base64.
-- MCP Client ensures all fields conform to tool schema.
+- `id` → unique request ID for matching responses.
+- Attachments are Base64 encoded.
+- MCP Client ensures all fields conform to the tool schema.
 
-## 🧰 MCP Server → Gmail API Call
+> *This JSON is now portable — any MCP-compliant server can interpret it.*
 
-**HTTP POST Request** (pseudo-code):
+---
+
+## Step 3 — MCP Server Execution
+
+The **MCP Server** receives the standardized request, maps it to the appropriate tool API (in this case, Gmail), and performs the action.
 
 ??? example "Gmail API Call (POST)"
     ```http
@@ -133,13 +212,19 @@ Key points:
     }
     ```
 
-- MCP Server handles **translation from MCP JSON → Gmail API format**.  
-- OAuth token ensures proper authentication.  
-- Handles Gmail-specific errors (invalid recipient, attachment too large).
+**Server responsibilities:**
+- Map the MCP method (`send_email`) to a real API endpoint (`POST /messages/send`).
+- Handle authentication (OAuth tokens).
+- Convert MCP JSON → Gmail API format.
+- Manage Gmail-specific errors and status codes.
+
+> *The MCP Server acts as the translator and executor between standardized MCP calls and the specific Gmail API.*
 
 ---
 
-## 🔄 Example MCP Response
+## Step 4 — Response Handling
+
+Once Gmail responds, the **MCP Server** packages the result back into an MCP-compliant JSON-RPC response and returns it to the **Client**, then the **Host**, and finally to the **User**.
 
 ??? example "Success Response"
     ```json
@@ -166,14 +251,28 @@ Key points:
     }
     ```
 
+**Key points:**
+- Both success and error cases follow the same JSON-RPC format.
+- The **Client** converts this structured result into a format the **LLM** can use.
+- The **LLM** then translates that into a natural-language confirmation for the user.
+
+> *Finally, the Host says: “Email sent successfully.”*
+
 ---
 
-## 🔍 Summary Table (Technical)
+## Summary Table (Technical Overview)
 
-| Component | Role | Technical Detail |
-|------------|------|----------------|
-| **MCP Host (LLM)** | Understands user intent | Parses natural language → structured action/params |
-| **MCP Client** | Translates & validates requests | JSON-RPC, schema validation, Base64 attachments |
-| **MCP Server** | Executes tool-specific calls | Maps MCP → Gmail API, handles auth & errors |
-| **Gmail API** | Actual tool | REST API endpoint `POST /messages/send` |
-| **Communication Standard** | MCP Protocol | JSON-RPC 2.0 between Host/Client/Server |
+Here’s a recap of what each component does during the full MCP → Gmail request journey.
+
+| Step | Component | Role | Technical Detail |
+|------|------------|------|------------------|
+| **0** | **Handshake / Tool Discovery** | Establish available tools | Host queries Client → Server for `get_capabilities` (tool list & schemas) |
+| **1** | **MCP Host (LLM)** | Understands user intent | Parses natural language → identifies action (`send_email`) + parameters |
+| **2** | **MCP Client** | Translates intent → JSON-RPC | Creates standardized request (`tool`, `method`, `params`), validates schema |
+| **3** | **MCP Server** | Executes tool-specific call | Maps MCP method to Gmail API, handles OAuth & errors |
+| **4** | **Gmail API** | Executes the real action | Sends actual email via `POST /gmail/v1/users/me/messages/send` |
+| **5** | **Communication Standard** | Defines data exchange rules | JSON-RPC 2.0 between Host ↔ Client ↔ Server |
+
+---
+
+> *Together, these components turn a simple user sentence (“Send an email to Alice”) into a precise, authenticated API call — all through a shared standard: the Model Context Protocol (MCP).*
