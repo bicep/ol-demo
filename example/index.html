@@ -196,7 +196,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-quick-note-on-json-rpc">
 <span class="md-ellipsis">
-      A quick note on JSON-RPC
+      A Quick Note on JSON-RPC
     </span>
 </a>
 </li>
@@ -208,13 +208,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#end-to-end-journey-of-the-request">
-<span class="md-ellipsis">
-      End to end journey of the request
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#detailed-data-flow">
 <span class="md-ellipsis">
       Detailed Data Flow
@@ -222,30 +215,51 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#example-mcp-request-json-rpc">
+<a class="md-nav__link" href="#end-to-end-journey-of-the-request">
 <span class="md-ellipsis">
-      Example MCP Request (JSON-RPC)
+      End to end journey of the request
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#mcp-server-gmail-api-call">
+<a class="md-nav__link" href="#step-0-tool-discovery-handshake">
 <span class="md-ellipsis">
-      🧰 MCP Server → Gmail API Call
+      Step 0: Tool Discovery (Handshake)
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#example-mcp-response">
+<a class="md-nav__link" href="#step-1-intent-parsing-mcp-host-llm">
 <span class="md-ellipsis">
-      🔄 Example MCP Response
+      Step 1: Intent Parsing (MCP Host / LLM)
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#summary-table-technical">
+<a class="md-nav__link" href="#step-2-mcp-client-translation">
 <span class="md-ellipsis">
-      🔍 Summary Table (Technical)
+      Step 2 — MCP Client Translation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-mcp-server-execution">
+<span class="md-ellipsis">
+      Step 3 — MCP Server Execution
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-4-response-handling">
+<span class="md-ellipsis">
+      Step 4 — Response Handling
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary-table-technical-overview">
+<span class="md-ellipsis">
+      Summary Table (Technical Overview)
     </span>
 </a>
 </li>
@@ -269,7 +283,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-quick-note-on-json-rpc">
 <span class="md-ellipsis">
-      A quick note on JSON-RPC
+      A Quick Note on JSON-RPC
     </span>
 </a>
 </li>
@@ -281,13 +295,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#end-to-end-journey-of-the-request">
-<span class="md-ellipsis">
-      End to end journey of the request
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#detailed-data-flow">
 <span class="md-ellipsis">
       Detailed Data Flow
@@ -295,30 +302,51 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#example-mcp-request-json-rpc">
+<a class="md-nav__link" href="#end-to-end-journey-of-the-request">
 <span class="md-ellipsis">
-      Example MCP Request (JSON-RPC)
+      End to end journey of the request
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#mcp-server-gmail-api-call">
+<a class="md-nav__link" href="#step-0-tool-discovery-handshake">
 <span class="md-ellipsis">
-      🧰 MCP Server → Gmail API Call
+      Step 0: Tool Discovery (Handshake)
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#example-mcp-response">
+<a class="md-nav__link" href="#step-1-intent-parsing-mcp-host-llm">
 <span class="md-ellipsis">
-      🔄 Example MCP Response
+      Step 1: Intent Parsing (MCP Host / LLM)
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#summary-table-technical">
+<a class="md-nav__link" href="#step-2-mcp-client-translation">
 <span class="md-ellipsis">
-      🔍 Summary Table (Technical)
+      Step 2 — MCP Client Translation
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-mcp-server-execution">
+<span class="md-ellipsis">
+      Step 3 — MCP Server Execution
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-4-response-handling">
+<span class="md-ellipsis">
+      Step 4 — Response Handling
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary-table-technical-overview">
+<span class="md-ellipsis">
+      Summary Table (Technical Overview)
     </span>
 </a>
 </li>
@@ -333,8 +361,25 @@
 <p>Now that we have looked at a few use cases and a high-level overview of MCP, let's dive into a <strong>detailed, technical example</strong> showing how an LLM communicates with Gmail via MCP.</p>
 <p>This example demonstrates how MCP works <strong>end-to-end</strong>, including how an LLM translates a user request into an actionable request for Gmail, and how the server executes it.</p>
 <hr/>
-<h2 id="a-quick-note-on-json-rpc">A quick note on JSON-RPC<a class="headerlink" href="#a-quick-note-on-json-rpc" title="Permanent link">¶</a></h2>
-<p>Most of agentic communications take place using the communications protocol JSON RPC; It is just a way of formatting requests and responses.</p>
+<h2 id="a-quick-note-on-json-rpc">A Quick Note on JSON-RPC<a class="headerlink" href="#a-quick-note-on-json-rpc" title="Permanent link">¶</a></h2>
+<p>Before diving deeper, it helps to understand the format that powers most MCP communications: <strong>JSON-RPC</strong>.</p>
+<p>It’s a lightweight, standardized way for two systems to talk — one sends a <strong>request</strong> (usually containing a <code>method</code> and some <code>params</code>), and the other sends back a <strong>response</strong> (with either a <code>result</code> or an <code>error</code>).</p>
+<p>Think of it as a <strong>common language for function calls over JSON</strong> — no custom API formats, just a consistent structure every time.</p>
+<hr/>
+<details>
+<summary>Example Request</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"send_email"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alice@example.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How are you?"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
 <hr/>
 <h2 id="scenario">Scenario<a class="headerlink" href="#scenario" title="Permanent link">¶</a></h2>
 <p>User says:</p>
@@ -349,6 +394,27 @@
 <blockquote>
 <p>"Done! I have sent the email to Alice using your gmail account."</p>
 </blockquote>
+<hr/>
+<h2 id="detailed-data-flow">Detailed Data Flow<a class="headerlink" href="#detailed-data-flow" title="Permanent link">¶</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+  participant U as User
+  participant H as MCP Host (LLM)
+  participant C as MCP Client
+  participant S as MCP Server
+  participant G as Gmail API
+  U-&gt;&gt;H: "Send an email to Alice with report attached"
+  H-&gt;&gt;C: Ask available tools (get_capabilities)
+  C-&gt;&gt;S: Request list of tools
+  S--&gt;&gt;C: Returns available tools (e.g. gmail.send_email)
+  C--&gt;&gt;H: Tool metadata returned
+  H-&gt;&gt;H: Parse intent → identify action &amp; parameters
+  H-&gt;&gt;C: MCP request JSON (tool: gmail, method: send_email, params {...})
+  C-&gt;&gt;S: Send JSON-RPC request
+  S-&gt;&gt;G: Map MCP → Gmail API call (POST /messages/send)
+  G--&gt;&gt;S: Gmail HTTP Response (200 OK / error)
+  S-&gt;&gt;C: Convert Gmail response → MCP JSON-RPC response
+  C-&gt;&gt;H: Return structured result
+  H-&gt;&gt;U: "Email sent successfully."</code></pre>
 <hr/>
 <h2 id="end-to-end-journey-of-the-request">End to end journey of the request<a class="headerlink" href="#end-to-end-journey-of-the-request" title="Permanent link">¶</a></h2>
 <p>We want to show <strong>everything that happens behind the scenes</strong>:</p>
@@ -399,29 +465,60 @@
 </ul>
 </details>
 <hr/>
-<h2 id="detailed-data-flow">Detailed Data Flow<a class="headerlink" href="#detailed-data-flow" title="Permanent link">¶</a></h2>
-<pre class="mermaid"><code>sequenceDiagram
-  participant U as User
-  participant H as MCP Host (LLM)
-  participant C as MCP Client
-  participant S as MCP Server
-  participant G as Gmail API
-  U-&gt;&gt;H: "Send an email to Alice with report attached"
-  H-&gt;&gt;C: Ask available tools (get_capabilities)
-  C-&gt;&gt;S: Request list of tools
-  S--&gt;&gt;C: Returns available tools (e.g. gmail.send_email)
-  C--&gt;&gt;H: Tool metadata returned
-  H-&gt;&gt;H: Parse intent → identify action &amp; parameters
-  H-&gt;&gt;C: MCP request JSON (tool: gmail, method: send_email, params {...})
-  C-&gt;&gt;S: Send JSON-RPC request
-  S-&gt;&gt;G: Map MCP → Gmail API call (POST /messages/send)
-  G--&gt;&gt;S: Gmail HTTP Response (200 OK / error)
-  S-&gt;&gt;C: Convert Gmail response → MCP JSON-RPC response
-  C-&gt;&gt;H: Return structured result
-  H-&gt;&gt;U: "Email sent successfully."</code></pre>
+<h2 id="step-0-tool-discovery-handshake">Step 0: Tool Discovery (Handshake)<a class="headerlink" href="#step-0-tool-discovery-handshake" title="Permanent link">¶</a></h2>
+<p>Before any request is made, the <strong>MCP Client</strong> asks the <strong>MCP Server</strong> what tools and methods are available.</p>
+<details class="example">
+<summary>Capability Discovery Request</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cap_001"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_capabilities"</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Capability Discovery Response</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cap_001"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gmail"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"methods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"send_email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"list_threads"</span><span class="p">,</span><span class="w"> </span><span class="s2">"read_message"</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>🟨 <em>This handshake allows the host (LLM) to know which tools exist and what parameters each supports.</em></p>
 <hr/>
-<h2 id="example-mcp-request-json-rpc">Example MCP Request (JSON-RPC)<a class="headerlink" href="#example-mcp-request-json-rpc" title="Permanent link">¶</a></h2>
+<h2 id="step-1-intent-parsing-mcp-host-llm">Step 1: Intent Parsing (MCP Host / LLM)<a class="headerlink" href="#step-1-intent-parsing-mcp-host-llm" title="Permanent link">¶</a></h2>
+<p>The <strong>LLM (Host)</strong> interprets the user’s natural language and converts it into a structured intent.</p>
+<blockquote>
+<p>“Send an email to Alice with the report attached.”</p>
+</blockquote>
 <details>
+<summary>LLM output (conceptually)</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"tool"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gmail"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"send_email"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alice@example.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Monthly Report"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi Alice, see attached."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"report.pdf"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<blockquote>
+<p>This prepares the request for translation into the MCP JSON-RPC standard.</p>
+</blockquote>
+<h2 id="step-2-mcp-client-translation">Step 2 — MCP Client Translation<a class="headerlink" href="#step-2-mcp-client-translation" title="Permanent link">¶</a></h2>
+<p>The <strong>MCP Client</strong> now converts the LLM’s structured intent into a standardized <strong>MCP JSON-RPC</strong> request that any MCP-compliant server can understand.</p>
+<details class="example">
 <summary>MCP Request (JSON-RPC)</summary>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span>
@@ -442,15 +539,17 @@
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<p>Key points:</p>
-<ul>
-<li><code>jsonrpc: "2.0"</code> → standard JSON-RPC 2.0 format.</li>
-<li><code>id</code> → unique request ID for matching response.</li>
-<li>Attachments encoded in Base64.</li>
-<li>MCP Client ensures all fields conform to tool schema.</li>
-</ul>
-<h2 id="mcp-server-gmail-api-call">🧰 MCP Server → Gmail API Call<a class="headerlink" href="#mcp-server-gmail-api-call" title="Permanent link">¶</a></h2>
-<p><strong>HTTP POST Request</strong> (pseudo-code):</p>
+<p><strong>Key points:</strong>
+- <code>jsonrpc: "2.0"</code> → standard JSON-RPC 2.0 format.
+- <code>id</code> → unique request ID for matching responses.
+- Attachments are Base64 encoded.
+- MCP Client ensures all fields conform to the tool schema.</p>
+<blockquote>
+<p><em>This JSON is now portable — any MCP-compliant server can interpret it.</em></p>
+</blockquote>
+<hr/>
+<h2 id="step-3-mcp-server-execution">Step 3 — MCP Server Execution<a class="headerlink" href="#step-3-mcp-server-execution" title="Permanent link">¶</a></h2>
+<p>The <strong>MCP Server</strong> receives the standardized request, maps it to the appropriate tool API (in this case, Gmail), and performs the action.</p>
 <details class="example">
 <summary>Gmail API Call (POST)</summary>
 <div class="highlight"><pre><span></span><code><span class="err">POST /gmail/v1/users/me/messages/send</span>
@@ -462,13 +561,17 @@
 <span class="err">}</span>
 </code></pre></div>
 </details>
-<ul>
-<li>MCP Server handles <strong>translation from MCP JSON → Gmail API format</strong>.  </li>
-<li>OAuth token ensures proper authentication.  </li>
-<li>Handles Gmail-specific errors (invalid recipient, attachment too large).</li>
-</ul>
+<p><strong>Server responsibilities:</strong>
+- Map the MCP method (<code>send_email</code>) to a real API endpoint (<code>POST /messages/send</code>).
+- Handle authentication (OAuth tokens).
+- Convert MCP JSON → Gmail API format.
+- Manage Gmail-specific errors and status codes.</p>
+<blockquote>
+<p><em>The MCP Server acts as the translator and executor between standardized MCP calls and the specific Gmail API.</em></p>
+</blockquote>
 <hr/>
-<h2 id="example-mcp-response">🔄 Example MCP Response<a class="headerlink" href="#example-mcp-response" title="Permanent link">¶</a></h2>
+<h2 id="step-4-response-handling">Step 4 — Response Handling<a class="headerlink" href="#step-4-response-handling" title="Permanent link">¶</a></h2>
+<p>Once Gmail responds, the <strong>MCP Server</strong> packages the result back into an MCP-compliant JSON-RPC response and returns it to the <strong>Client</strong>, then the <strong>Host</strong>, and finally to the <strong>User</strong>.</p>
 <details class="example">
 <summary>Success Response</summary>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -494,11 +597,20 @@
 <span class="p">}</span>
 </code></pre></div>
 </details>
+<p><strong>Key points:</strong>
+- Both success and error cases follow the same JSON-RPC format.
+- The <strong>Client</strong> converts this structured result into a format the <strong>LLM</strong> can use.
+- The <strong>LLM</strong> then translates that into a natural-language confirmation for the user.</p>
+<blockquote>
+<p><em>Finally, the Host says: “Email sent successfully.”</em></p>
+</blockquote>
 <hr/>
-<h2 id="summary-table-technical">🔍 Summary Table (Technical)<a class="headerlink" href="#summary-table-technical" title="Permanent link">¶</a></h2>
+<h2 id="summary-table-technical-overview">Summary Table (Technical Overview)<a class="headerlink" href="#summary-table-technical-overview" title="Permanent link">¶</a></h2>
+<p>Here’s a recap of what each component does during the full MCP → Gmail request journey.</p>
 <table>
 <thead>
 <tr>
+<th>Step</th>
 <th>Component</th>
 <th>Role</th>
 <th>Technical Detail</th>
@@ -506,32 +618,47 @@
 </thead>
 <tbody>
 <tr>
+<td><strong>0</strong></td>
+<td><strong>Handshake / Tool Discovery</strong></td>
+<td>Establish available tools</td>
+<td>Host queries Client → Server for <code>get_capabilities</code> (tool list &amp; schemas)</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
 <td><strong>MCP Host (LLM)</strong></td>
 <td>Understands user intent</td>
-<td>Parses natural language → structured action/params</td>
+<td>Parses natural language → identifies action (<code>send_email</code>) + parameters</td>
 </tr>
 <tr>
+<td><strong>2</strong></td>
 <td><strong>MCP Client</strong></td>
-<td>Translates &amp; validates requests</td>
-<td>JSON-RPC, schema validation, Base64 attachments</td>
+<td>Translates intent → JSON-RPC</td>
+<td>Creates standardized request (<code>tool</code>, <code>method</code>, <code>params</code>), validates schema</td>
 </tr>
 <tr>
+<td><strong>3</strong></td>
 <td><strong>MCP Server</strong></td>
-<td>Executes tool-specific calls</td>
-<td>Maps MCP → Gmail API, handles auth &amp; errors</td>
+<td>Executes tool-specific call</td>
+<td>Maps MCP method to Gmail API, handles OAuth &amp; errors</td>
 </tr>
 <tr>
+<td><strong>4</strong></td>
 <td><strong>Gmail API</strong></td>
-<td>Actual tool</td>
-<td>REST API endpoint <code>POST /messages/send</code></td>
+<td>Executes the real action</td>
+<td>Sends actual email via <code>POST /gmail/v1/users/me/messages/send</code></td>
 </tr>
 <tr>
+<td><strong>5</strong></td>
 <td><strong>Communication Standard</strong></td>
-<td>MCP Protocol</td>
-<td>JSON-RPC 2.0 between Host/Client/Server</td>
+<td>Defines data exchange rules</td>
+<td>JSON-RPC 2.0 between Host ↔ Client ↔ Server</td>
 </tr>
 </tbody>
 </table>
+<hr/>
+<blockquote>
+<p><em>Together, these components turn a simple user sentence (“Send an email to Alice”) into a precise, authenticated API call — all through a shared standard: the Model Context Protocol (MCP).</em></p>
+</blockquote>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
