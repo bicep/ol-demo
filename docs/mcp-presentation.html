@@ -35,7 +35,7 @@
 <h2 id="%F0%9F%8E%AF-the-core-idea"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> The Core Idea</h2>
 <p>If you forget everything else, remember this:</p>
 <blockquote>
-<p><strong>Think of MCP as a universal docking station for AI models. It lets LLMs connect to any tool — Gmail, Slack, Figma, you name it — through a single, standardized protocol.</strong></p>
+<p><strong>Think of MCP as a universal docking station for AI models. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.</strong></p>
 </blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="default" lang="en-US" data-marpit-pagination="5" style="--paginate:true;--theme:default;" data-marpit-pagination-total="13">
@@ -62,15 +62,15 @@ sequenceDiagram
 <div class="mermaid">
 sequenceDiagram
     participant Model
-    participant MCPServer
+    participant MCP
     participant Tool1
     participant Tool2
-    Model-&gt;&gt;MCPServer: Standardized request
-    MCPServer-&gt;&gt;Tool1: Invoke Tool1
-    MCPServer-&gt;&gt;Tool2: Invoke Tool2
-    Tool1--&gt;&gt;MCPServer: Response
-    Tool2--&gt;&gt;MCPServer: Response
-    MCPServer--&gt;&gt;Model: Standardized response
+    Model-&gt;&gt;MCP: Standardized request
+    MCP-&gt;&gt;Tool1: Invoke Tool1
+    MCP-&gt;&gt;Tool2: Invoke Tool2
+    Tool1--&gt;&gt;MCP: Response
+    Tool2--&gt;&gt;MCP: Response
+    MCP--&gt;&gt;Model: Standardized response
 </div>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="default" lang="en-US" data-marpit-pagination="8" style="--paginate:true;--theme:default;" data-marpit-pagination-total="13">
@@ -122,7 +122,11 @@ sequenceDiagram
     participant Server
     participant GCalendar
     User-&gt;&gt;Host: "Set a reminder for 10 AM tomorrow"
-    Host-&gt;&gt;Client: Generate MCP request
+    Host-&gt;&gt;Client: Ask what tools are available
+    Client-&gt;&gt;Server: get_capabilities
+    Server--&gt;&gt;Client: List of tools (e.g. create_event)
+    Client--&gt;&gt;Host: Tool metadata returned
+    Host-&gt;&gt;Client: Generate MCP request (invoke create_event)
     Client-&gt;&gt;Server: create_event request (time: 10 AM, title: reminder)
     Server-&gt;&gt;GCalendar: Execute create event
     GCalendar--&gt;&gt;Server: Event created

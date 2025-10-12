@@ -1,4 +1,4 @@
-# 🧠 Model Context Protocol Explained
+# Model Context Protocol Explained
 | ![MCP analogy](image.png) | 
 |:--:| 
 | *The USB-C analogy of MCP (Image: [Norah Sakal](https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/))* |

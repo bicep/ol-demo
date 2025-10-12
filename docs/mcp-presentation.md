@@ -41,7 +41,7 @@ p > img {
 ## 🎯 The Core Idea
 If you forget everything else, remember this:
 
-> **Think of MCP as a universal docking station for AI models. It lets LLMs connect to any tool — Gmail, Slack, Figma, you name it — through a single, standardized protocol.**
+> **Think of MCP as a universal docking station for AI models. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.**
 
 ---
 
@@ -72,15 +72,15 @@ At its heart, MCP defines a shared protocol for how large language models commun
 <div class="mermaid">
 sequenceDiagram
     participant Model
-    participant MCPServer
+    participant MCP
     participant Tool1
     participant Tool2
-    Model->>MCPServer: Standardized request
-    MCPServer->>Tool1: Invoke Tool1
-    MCPServer->>Tool2: Invoke Tool2
-    Tool1-->>MCPServer: Response
-    Tool2-->>MCPServer: Response
-    MCPServer-->>Model: Standardized response
+    Model->>MCP: Standardized request
+    MCP->>Tool1: Invoke Tool1
+    MCP->>Tool2: Invoke Tool2
+    Tool1-->>MCP: Response
+    Tool2-->>MCP: Response
+    MCP-->>Model: Standardized response
 </div>
 
 ---
@@ -125,7 +125,11 @@ sequenceDiagram
     participant Server
     participant GCalendar
     User->>Host: "Set a reminder for 10 AM tomorrow"
-    Host->>Client: Generate MCP request
+    Host->>Client: Ask what tools are available
+    Client->>Server: get_capabilities
+    Server-->>Client: List of tools (e.g. create_event)
+    Client-->>Host: Tool metadata returned
+    Host->>Client: Generate MCP request (invoke create_event)
     Client->>Server: create_event request (time: 10 AM, title: reminder)
     Server->>GCalendar: Execute create event
     GCalendar-->>Server: Event created
