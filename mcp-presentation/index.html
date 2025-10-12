@@ -256,37 +256,36 @@ p > img {
 <p>MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.</p>
 </blockquote>
 <hr/>
-<h2 id="1-the-problem-mcp-is-trying-to-solve">1️⃣ The Problem MCP is trying to Solve<a class="headerlink" href="#1-the-problem-mcp-is-trying-to-solve" title="Permanent link">¶</a></h2>
-<p>Modern AI tools often act in isolation — each with their own APIs and context limits.<br/>
-This leads to duplication, inconsistency, and limited cooperation between systems.</p>
+<h2 id="1-the-problem">1️⃣ The Problem<a class="headerlink" href="#1-the-problem" title="Permanent link">¶</a></h2>
+<p>Modern AI tools often act in isolation — each with their own APIs and context limits.  </p>
 <div class="mermaid">
 sequenceDiagram
     participant Model
     participant ToolA
     participant ToolB
-    Model-&gt;&gt;ToolA: Custom API call
-    Model-&gt;&gt;ToolB: Custom API call
+    Model-&gt;&gt;ToolA: Custom API call for Tool A (different format)
+    Model-&gt;&gt;ToolB: Custom API call for Tool B (different format)
 </div>
-<p>Without a standard, every connection is a separate cable — fragile and error-prone.</p>
 <hr/>
-<h2 id="2-the-core-concept">2️⃣ The Core Concept<a class="headerlink" href="#2-the-core-concept" title="Permanent link">¶</a></h2>
+<h2 id="2-how-mcp-solves-the-problem">2️⃣ How MCP Solves the Problem<a class="headerlink" href="#2-how-mcp-solves-the-problem" title="Permanent link">¶</a></h2>
 <p>At its heart, MCP defines a shared protocol for how large language models communicate with its tools</p>
 <div class="mermaid">
-flowchart TD
-    A[AI Model] --&gt;|Request| B[MCP Server]
-    B --&gt;|Invoke| C[Tool 1]
-    B --&gt;|Invoke| D[Tool 2]
-    C --&gt; B
-    D --&gt; B
-    B --&gt;|Return| A
+sequenceDiagram
+    participant Model
+    participant MCPServer
+    participant Tool1
+    participant Tool2
+    Model-&gt;&gt;MCPServer: Standardized request
+    MCPServer-&gt;&gt;Tool1: Invoke Tool1
+    MCPServer-&gt;&gt;Tool2: Invoke Tool2
+    Tool1--&gt;&gt;MCPServer: Response
+    Tool2--&gt;&gt;MCPServer: Response
+    MCPServer--&gt;&gt;Model: Standardized response
 </div>
-<blockquote>
-<p>The MCP server acts as a universal connector, handling requests and responses in a standard format.</p>
-</blockquote>
 <hr/>
 <h2 id="3-mcp-architecture-client-server">3️⃣ MCP Architecture: Client &amp; Server<a class="headerlink" href="#3-mcp-architecture-client-server" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>MCP has three main components: <strong>Host (AI model)</strong>, <strong>Client</strong>, and <strong>Server (Tool)</strong>.  </p>
+<p>MCP has three main components: <strong>Host (LLM)</strong>, <strong>Client</strong>, and <strong>Server (Tool)</strong>.  </p>
 </blockquote>
 <hr/>
 <table>
@@ -317,9 +316,9 @@ flowchart LR
 <li><strong>Server</strong>: Executes the request on the tool and sends back a standard response.  </li>
 </ul>
 <hr/>
-<h2 id="4-concrete-example-sending-an-email">4️⃣ Concrete Example: Sending an Email<a class="headerlink" href="#4-concrete-example-sending-an-email" title="Permanent link">¶</a></h2>
+<h2 id="4-concrete-example-setting-a-reminder">4️⃣ Concrete Example: Setting a Reminder<a class="headerlink" href="#4-concrete-example-setting-a-reminder" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>Imagine your AI wants to send an email via Gmail.</p>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
 </blockquote>
 <div class="mermaid">
 sequenceDiagram
@@ -327,20 +326,16 @@ sequenceDiagram
     participant Host
     participant Client
     participant Server
-    participant Gmail
-    User-&gt;&gt;Host: "Send email to Alice with report"
+    participant GCalendar
+    User-&gt;&gt;Host: "Set a reminder for 10 AM tomorrow"
     Host-&gt;&gt;Client: Generate MCP request
-    Client-&gt;&gt;Server: send_email request (to: Alice, body: report)
-    Server-&gt;&gt;Gmail: Execute send email
-    Gmail--&gt;&gt;Server: Email sent
+    Client-&gt;&gt;Server: create_event request (time: 10 AM, title: reminder)
+    Server-&gt;&gt;GCalendar: Execute create event
+    GCalendar--&gt;&gt;Server: Event created
     Server-&gt;&gt;Client: Success response
     Client-&gt;&gt;Host: Return structured result
-    Host-&gt;&gt;User: Email sent confirmation
+    Host-&gt;&gt;User: "Reminder set for 10 AM tomorrow."
 </div>
-<ul>
-<li>The AI never talks directly to Gmail — it goes through <strong>MCP Client &amp; Server</strong>.  </li>
-<li>Any tool (Slack, Google Docs, etc.) can be plugged in using the same pattern.  </li>
-</ul>
 <hr/>
 <h2 id="5-why-this-matters-product-use-cases">5️⃣ Why This Matters: Product Use Cases<a class="headerlink" href="#5-why-this-matters-product-use-cases" title="Permanent link">¶</a></h2>
 <table>
@@ -355,22 +350,24 @@ sequenceDiagram
 <tr>
 <td><strong>📩 Automating Email</strong></td>
 <td>AI sends, schedules, or drafts emails through Gmail</td>
-<td>Host (LLM) → Client → Gmail Server</td>
+<td>Host (LLM) → Client → Gmail MCP Server</td>
 </tr>
 <tr>
 <td><strong>📊 Generating Reports</strong></td>
 <td>AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports</td>
-<td>Host → Client → Tool Servers (Sheets, DBs)</td>
+<td>Host → Client → Tool MCP Servers (Sheets, DBs)</td>
 </tr>
 <tr>
 <td><strong>💬 Managing Chatbots</strong></td>
 <td>AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly</td>
-<td>Host → Client → Chat Platforms Servers</td>
+<td>Host → Client → Chat Platforms MCP Servers</td>
 </tr>
 </tbody>
 </table>
+<hr/>
+<h2 id="5-whats-next">5️⃣ What's next?<a class="headerlink" href="#5-whats-next" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>We’ll go into detail on <a href="../example/"><strong>email automation</strong></a>, which demonstrates the full MCP flow in a simple example.</p>
+<p>We’ll go into detail on <a href="example"><strong>email automation</strong></a>, which demonstrates the full MCP flow in a simple example.</p>
 </blockquote>
 </article>
 </div>
