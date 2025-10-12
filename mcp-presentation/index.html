@@ -248,7 +248,7 @@ p > img {
 <h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
 <p>If you forget everything else, remember this:</p>
 <blockquote>
-<p><strong>Think of MCP as a universal docking station for AI models. It lets LLMs connect to any tool — Gmail, Slack, Figma, you name it — through a single, standardized protocol.</strong></p>
+<p><strong>Think of MCP as a universal docking station for AI models. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.</strong></p>
 </blockquote>
 <hr/>
 <h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
@@ -272,15 +272,15 @@ sequenceDiagram
 <div class="mermaid">
 sequenceDiagram
     participant Model
-    participant MCPServer
+    participant MCP
     participant Tool1
     participant Tool2
-    Model-&gt;&gt;MCPServer: Standardized request
-    MCPServer-&gt;&gt;Tool1: Invoke Tool1
-    MCPServer-&gt;&gt;Tool2: Invoke Tool2
-    Tool1--&gt;&gt;MCPServer: Response
-    Tool2--&gt;&gt;MCPServer: Response
-    MCPServer--&gt;&gt;Model: Standardized response
+    Model-&gt;&gt;MCP: Standardized request
+    MCP-&gt;&gt;Tool1: Invoke Tool1
+    MCP-&gt;&gt;Tool2: Invoke Tool2
+    Tool1--&gt;&gt;MCP: Response
+    Tool2--&gt;&gt;MCP: Response
+    MCP--&gt;&gt;Model: Standardized response
 </div>
 <hr/>
 <h2 id="3-mcp-architecture-client-server">3️⃣ MCP Architecture: Client &amp; Server<a class="headerlink" href="#3-mcp-architecture-client-server" title="Permanent link">¶</a></h2>
@@ -328,7 +328,11 @@ sequenceDiagram
     participant Server
     participant GCalendar
     User-&gt;&gt;Host: "Set a reminder for 10 AM tomorrow"
-    Host-&gt;&gt;Client: Generate MCP request
+    Host-&gt;&gt;Client: Ask what tools are available
+    Client-&gt;&gt;Server: get_capabilities
+    Server--&gt;&gt;Client: List of tools (e.g. create_event)
+    Client--&gt;&gt;Host: Tool metadata returned
+    Host-&gt;&gt;Client: Generate MCP request (invoke create_event)
     Client-&gt;&gt;Server: create_event request (time: 10 AM, title: reminder)
     Server-&gt;&gt;GCalendar: Execute create event
     GCalendar--&gt;&gt;Server: Event created
