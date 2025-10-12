@@ -6,10 +6,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://bicep.github.io/ol-demo/" rel="canonical"/>
-<link href="mcp-presentation.html" rel="next"/>
+<link href="about-me/" rel="next"/>
 <link href="assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.21" name="generator"/>
-<title>Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other</title>
+<title>How Does AI Talk to Its Tools?</title>
 <link href="assets/stylesheets/main.2a3383ac.min.css" rel="stylesheet"/>
 <link href="assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -30,7 +30,7 @@
 </div>
 <header class="md-header" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other" class="md-header__button md-logo" data-md-component="logo" href="." title="Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other">
+<a aria-label="How Does AI Talk to Its Tools?" class="md-header__button md-logo" data-md-component="logo" href="." title="How Does AI Talk to Its Tools?">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
@@ -40,7 +40,7 @@
 <div class="md-header__ellipsis">
 <div class="md-header__topic">
 <span class="md-ellipsis">
-            Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other
+            How Does AI Talk to Its Tools?
           </span>
 </div>
 <div class="md-header__topic" data-md-component="header-topic">
@@ -100,7 +100,7 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="about-me.md">
+<a class="md-tabs__link" href="about-me/">
         
   
   
@@ -122,13 +122,13 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="a-concrete-example/">
+<a class="md-tabs__link" href="example/">
         
   
   
     
   
-  A Concrete Example
+  Example
 
       </a>
 </li>
@@ -142,98 +142,23 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other" class="md-nav__button md-logo" data-md-component="logo" href="." title="Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other">
+<a aria-label="How Does AI Talk to Its Tools?" class="md-nav__button md-logo" data-md-component="logo" href="." title="How Does AI Talk to Its Tools?">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
-    Explaining the Model Context Protocol (MCP) — How AI Tools Talk to Each Other
+    How Does AI Talk to Its Tools?
   </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    Home
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
 <a class="md-nav__link md-nav__link--active" href=".">
 <span class="md-ellipsis">
     Home
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#the-core-idea">
-<span class="md-ellipsis">
-      🎯 The Core Idea
-    </span>
-</a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-the-problem-it-solves">
-<span class="md-ellipsis">
-      1️⃣ The Problem It Solves
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#2-the-core-concept">
-<span class="md-ellipsis">
-      2️⃣ The Core Concept
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-analogy-in-action">
-<span class="md-ellipsis">
-      3️⃣ Analogy in Action
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-what-makes-mcp-different">
-<span class="md-ellipsis">
-      4️⃣ What Makes MCP Different
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-quick-example">
-<span class="md-ellipsis">
-      5️⃣ Quick Example
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#tldr">
-<span class="md-ellipsis">
-      ✅ TL;DR
-    </span>
-</a>
-<nav aria-label="✅ TL;DR" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#next-steps">
-<span class="md-ellipsis">
-      Next Steps
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="about-me.md">
+<a class="md-nav__link" href="about-me/">
 <span class="md-ellipsis">
     About me
     
@@ -249,9 +174,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="a-concrete-example/">
+<a class="md-nav__link" href="example/">
 <span class="md-ellipsis">
-    A Concrete Example
+    Example
     
   </span>
 </a>
@@ -265,72 +190,6 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#the-core-idea">
-<span class="md-ellipsis">
-      🎯 The Core Idea
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#1-the-problem-it-solves">
-<span class="md-ellipsis">
-      1️⃣ The Problem It Solves
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#2-the-core-concept">
-<span class="md-ellipsis">
-      2️⃣ The Core Concept
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-analogy-in-action">
-<span class="md-ellipsis">
-      3️⃣ Analogy in Action
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-what-makes-mcp-different">
-<span class="md-ellipsis">
-      4️⃣ What Makes MCP Different
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-quick-example">
-<span class="md-ellipsis">
-      5️⃣ Quick Example
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#tldr">
-<span class="md-ellipsis">
-      ✅ TL;DR
-    </span>
-</a>
-<nav aria-label="✅ TL;DR" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#next-steps">
-<span class="md-ellipsis">
-      Next Steps
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
 </nav>
 </div>
 </div>
@@ -338,106 +197,21 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="model-context-protocol-explained">🧠 Model Context Protocol Explained<a class="headerlink" href="#model-context-protocol-explained" title="Permanent link">¶</a></h1>
-<p><em>A simple way to understand how AI tools communicate.</em></p>
-<details>
-<summary>What is MCP?</summary>
-<p>MCP is a protocol that allows AI models to communicate with external systems through standardized requests.</p>
-</details>
-<details class="tip">
-<summary>Example Request</summary>
-<div class="highlight"><pre><span></span><code>{
-  "type": "mcp.request",
-  "action": "send_email",
-  "data": { "to": "user@example.com" }
-}
-</code></pre></div>
-</details>
-<hr/>
-<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
-<p>If you forget everything else, remember this:</p>
-<blockquote>
-<p><strong>MCP is like a USB port for AI tools — any tool can plug in, communicate in a standard way, and work immediately.</strong></p>
-</blockquote>
-<p><img alt="alt text" src="image.png"/></p>
-<hr/>
-<h2 id="1-the-problem-it-solves">1️⃣ The Problem It Solves<a class="headerlink" href="#1-the-problem-it-solves" title="Permanent link">¶</a></h2>
-<p>Modern AI tools often act in isolation — each with their own APIs and context limits.<br/>
-This leads to duplication, inconsistency, and limited cooperation between systems.</p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant Model
-    participant ToolA
-    participant ToolB
-    Model-&gt;&gt;ToolA: Custom API call
-    Model-&gt;&gt;ToolB: Custom API call</code></pre>
-<p>Without a standard, every connection is a separate cable — fragile and error-prone.</p>
-<h2 id="2-the-core-concept">2️⃣ The Core Concept<a class="headerlink" href="#2-the-core-concept" title="Permanent link">¶</a></h2>
-<p>At its heart, MCP defines a shared protocol for models, tools, and clients.</p>
-<pre class="mermaid"><code>flowchart TD
-    A[AI Model] --&gt;|Request| B[MCP Server]
-    B --&gt;|Invoke| C[Tool 1]
-    B --&gt;|Invoke| D[Tool 2]
-    C --&gt; B
-    D --&gt; B
-    B --&gt;|Return| A</code></pre>
-<blockquote>
-<p>The MCP server acts as a universal connector, handling requests and responses in a standard format.</p>
-</blockquote>
-<h2 id="3-analogy-in-action">3️⃣ Analogy in Action<a class="headerlink" href="#3-analogy-in-action" title="Permanent link">¶</a></h2>
-<ul>
-<li><strong>AI Model</strong> = the device (e.g., laptop)  </li>
-<li><strong>MCP Server</strong> = the USB hub / port  </li>
-<li><strong>Tools</strong> = external devices (e.g., keyboard, mouse, hard drive)  </li>
-</ul>
-<p>Every “plug in” request goes through the hub, ensuring devices communicate reliably.</p>
-<hr/>
-<h2 id="4-what-makes-mcp-different">4️⃣ What Makes MCP Different<a class="headerlink" href="#4-what-makes-mcp-different" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Traditional API</th>
-<th>Model Context Protocol</th>
+<th style="text-align: center;"><img alt="MCP analogy" src="image.png"/></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Communication</td>
-<td>One-to-one</td>
-<td>Many-to-many</td>
-</tr>
-<tr>
-<td>Context awareness</td>
-<td>Local only</td>
-<td>Shared and global</td>
-</tr>
-<tr>
-<td>Extensibility</td>
-<td>Manual integration</td>
-<td>Automatic tool discovery</td>
+<td style="text-align: center;"><em>The USB-C analogy of MCP (Image: <a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/">Norah Sakal</a>)</em></td>
 </tr>
 </tbody>
 </table>
-<hr/>
-<h2 id="5-quick-example">5️⃣ Quick Example<a class="headerlink" href="#5-quick-example" title="Permanent link">¶</a></h2>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"request"</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"get_weather"</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Singapore"</span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-- MCP interprets the request.
-- Routes it to the correct tool.
-- Merges the result back into the model’s context seamlessly.</p>
-<h2 id="tldr">✅ TL;DR<a class="headerlink" href="#tldr" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>MCP is like a <strong>USB port for AI tools</strong> — plug in any tool, communicate using a standard language, and it just works.</p>
-</blockquote>
-<hr/>
-<h3 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h3>
-<ul>
-<li><a href="a-concrete-example/">A Concrete Example →</a> </li>
-<li><a href="why-it-matters.md">Why It Matters →</a></li>
-</ul>
+<p>Since Claude <a href="https://www.anthropic.com/news/model-context-protocol">announced the inception of Model Context Protocol (MCP) in November 2024</a>, there’s been a lot of buzz in the AI and developer communities.</p>
+<p>Today, I’ll attempt to explain MCP in simple terms, so that by the end, you’ll understand not just what it does, but why it’s exciting. We’ll cover the basic components, how a request flows from an AI model to a tool, and why this standardization could be a game-changer for developers and users alike.</p>
+<p>Learn more about me on the <a href="about.md">About Me</a> page, or dive straight into the <a href="presentation.md">Presentation</a> and <a href="example/">Example</a>.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
