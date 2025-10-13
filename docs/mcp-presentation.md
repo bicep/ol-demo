@@ -41,7 +41,7 @@ p > img {
 ## 🎯 The Core Idea
 If you forget everything else, remember this:
 
-> **Think of MCP as a universal docking station for AI models. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.**
+> **Think of MCP as a universal docking station for LLMs to connect with its tools. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.**
 
 ---
 
