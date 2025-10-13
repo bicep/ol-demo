@@ -34,24 +34,7 @@ p > img {
 
 ---
 
-![alt text](image.png)
-
----
-
-## 🎯 The Core Idea
-If you forget everything else, remember this:
-
-> **Think of MCP as a universal docking station for LLMs to connect with its tools. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.**
-
----
-
-# Understanding MCP
-
-> MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
-
----
-
-## 1️⃣ The Problem
+## The Problem
 Modern AI tools often act in isolation — each with their own APIs and context limits.  
 
 <div class="mermaid">
@@ -65,7 +48,7 @@ sequenceDiagram
 
 ---
 
-## 2️⃣ How MCP Solves the Problem
+## How MCP Solves the Problem
 
 At its heart, MCP defines a shared protocol for how large language models communicate with its tools
 
@@ -85,7 +68,45 @@ sequenceDiagram
 
 ---
 
-## 3️⃣ MCP Architecture: Client & Server
+![alt text](image.png)
+
+---
+
+## 🎯 The Core Idea
+If you forget everything else, remember this:
+
+> **Think of MCP as a universal docking station for LLMs to connect with its tools.**
+
+---
+
+# Understanding MCP
+
+- Released in 2024 by Anthropic; quickly adopted by the community
+- It is an open-source standard for connecting AI applications to external systems.
+- Using MCP, AI applications like Claude or ChatGPT can connect to
+    - data sources (e.g. local files, databases)
+    - tools (e.g. search engines, calculators)
+    - workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
+
+---
+
+<div class="mermaid">
+sequenceDiagram
+    participant Model
+    participant MCP
+    participant Tool1
+    participant Tool2
+    Model->>MCP: Standardized request
+    MCP->>Tool1: Invoke Tool1
+    MCP->>Tool2: Invoke Tool2
+    Tool1-->>MCP: Response
+    Tool2-->>MCP: Response
+    MCP-->>Model: Standardized response
+</div>
+
+---
+
+## MCP Architecture: Client & Server
 
 > MCP has three main components: **Host (LLM)**, **Client**, and **Server (Tool)**.  
 
@@ -93,64 +114,277 @@ sequenceDiagram
 
 | ![MCP Architecture](image-5.png)| 
 |:--:| 
-| *MCP Architecture (Image: [Kashish Hora](https://mcpcat.io/blog/mcp-server-client-host/))* |
+| *MCP Architecture (Image: [Kashish Hora](https://mcpcat.io/blog/mcp-server-client-host/))* | 
 
 ---
 
-<div class="mermaid">
-flowchart LR
-    A[AI Model / Host] -->|Sends Intent| B[MCP Client]
-    B -->|Standardized MCP Request| C[MCP Server]
-    C -->|Executes Action| D[External Tool]
-    D --> C
-    C -->|Standardized Response| B
-    B -->|Delivers Result| A
-</div>
-
-- **Host / Model**: Knows what it wants to do (e.g., send an email).  
-- **Client**: Converts intent into an MCP request the server can understand.  
-- **Server**: Executes the request on the tool and sends back a standard response.  
-
----
-
-## 4️⃣ Concrete Example: Setting a Reminder
+## Concrete Example: Setting a Reminder
 
 > Imagine your AI wants to set a reminder for you via Google Calendar.
 
 <div class="mermaid">
 sequenceDiagram
     participant User
-    participant Host
-    participant Client
-    participant Server
+    participant LLM
+    participant MCPClient
+    participant MCPServer
     participant GCalendar
-    User->>Host: "Set a reminder for 10 AM tomorrow"
-    Host->>Client: Ask what tools are available
-    Client->>Server: get_capabilities
-    Server-->>Client: List of tools (e.g. create_event)
-    Client-->>Host: Tool metadata returned
-    Host->>Client: Generate MCP request (invoke create_event)
-    Client->>Server: create_event request (time: 10 AM, title: reminder)
-    Server->>GCalendar: Execute create event
-    GCalendar-->>Server: Event created
-    Server->>Client: Success response
-    Client->>Host: Return structured result
-    Host->>User: "Reminder set for 10 AM tomorrow."
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
 </div>
 
 ---
 
-## 5️⃣ Why This Matters: Product Use Cases
+## Concrete Example: Setting a Reminder
 
+> Imagine your AI wants to set a reminder for you via Google Calendar.
 
-| Use Case | How MCP Applies | MCP Components Involved |
-|----------|----------------|------------------------|
-| **📩 Automating Email** | AI sends, schedules, or drafts emails through Gmail | Host (LLM) → Client → Gmail MCP Server |
-| **📊 Generating Reports** | AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports | Host → Client → Tool MCP Servers (Sheets, DBs) |
-| **💬 Managing Chatbots** | AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly | Host → Client → Chat Platforms MCP Servers |
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+</div>
 
 ---
 
-## 5️⃣ What's next?
+## Concrete Example: Setting a Reminder
 
-> We’ll go into detail on [**email automation**](example), which demonstrates the full MCP flow in a simple example.
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer->>GCalendar: Execute create event
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer->>GCalendar: Execute create event
+    GCalendar-->>MCPServer: Event created
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer->>GCalendar: Execute create event
+    GCalendar-->>MCPServer: Event created
+    MCPServer->>MCPClient: Success response
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer->>GCalendar: Execute create event
+    GCalendar-->>MCPServer: Event created
+    MCPServer->>MCPClient: Success response
+    MCPClient->>LLM: Return structured result
+</div>
+
+---
+
+## Concrete Example: Setting a Reminder
+
+> Imagine your AI wants to set a reminder for you via Google Calendar.
+
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User->>LLM: "Set a reminder for 10 AM tomorrow"
+    LLM->>MCPClient: Ask what tools are available
+    MCPClient->>MCPServer: get_capabilities
+    MCPServer-->>MCPClient: List of tools (e.g. create_event)
+    MCPClient-->>LLM: Tool metadata returned
+    LLM->>MCPClient: Generate MCP request (invoke create_event)
+    MCPClient->>MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer->>GCalendar: Execute create event
+    GCalendar-->>MCPServer: Event created
+    MCPServer->>MCPClient: Success response
+    MCPClient->>LLM: Return structured result
+    LLM->>User: "Reminder set for 10 AM tomorrow."
+</div>
+
+---
+
+## Why This Matters: Real-World Potential
+
+| Use Case | How MCP Applies | MCP Components Involved |
+|-----------|----------------|--------------------------|
+| **🧠 Unified AI Workspace** | Connects tools like Notion, Slack, and Figma so your AI can summarize meetings, update project boards, and draft designs — all in one conversation. | Host (LLM) → Client → Multi-tool MCP Servers |
+| **🏙️ Smart City Dashboards** | City AIs can pull live data from transport, weather, and energy systems to generate insights or alerts — no manual API wiring needed. | Host → Client → IoT / Gov Data MCP Servers |
+
+---
+
+## That's it for the presentation. What's next?
+
+> If you're interested check out the full MCP flow in more detail with this [example](example), or head back to the [homepage](/).
