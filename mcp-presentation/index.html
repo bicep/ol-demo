@@ -194,6 +194,20 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#the-problem">
+<span class="md-ellipsis">
+      The Problem
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#how-mcp-solves-the-problem">
+<span class="md-ellipsis">
+      How MCP Solves the Problem
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#the-core-idea">
 <span class="md-ellipsis">
       🎯 The Core Idea
@@ -243,20 +257,7 @@ p > img {
 </tbody>
 </table>
 <hr/>
-<p><img alt="alt text" src="../image.png"/></p>
-<hr/>
-<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
-<p>If you forget everything else, remember this:</p>
-<blockquote>
-<p><strong>Think of MCP as a universal docking station for LLMs to connect with its tools. It lets LLMs discover which tool (Gmail, Slack, Figma, etc) to use and  connect to it through a single, standardized protocol.</strong></p>
-</blockquote>
-<hr/>
-<h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
-<blockquote>
-<p>MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems. Using MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.</p>
-</blockquote>
-<hr/>
-<h2 id="1-the-problem">1️⃣ The Problem<a class="headerlink" href="#1-the-problem" title="Permanent link">¶</a></h2>
+<h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">¶</a></h2>
 <p>Modern AI tools often act in isolation — each with their own APIs and context limits.  </p>
 <div class="mermaid">
 sequenceDiagram
@@ -267,7 +268,7 @@ sequenceDiagram
     Model-&gt;&gt;ToolB: Custom API call for Tool B (different format)
 </div>
 <hr/>
-<h2 id="2-how-mcp-solves-the-problem">2️⃣ How MCP Solves the Problem<a class="headerlink" href="#2-how-mcp-solves-the-problem" title="Permanent link">¶</a></h2>
+<h2 id="how-mcp-solves-the-problem">How MCP Solves the Problem<a class="headerlink" href="#how-mcp-solves-the-problem" title="Permanent link">¶</a></h2>
 <p>At its heart, MCP defines a shared protocol for how large language models communicate with its tools</p>
 <div class="mermaid">
 sequenceDiagram
@@ -283,7 +284,41 @@ sequenceDiagram
     MCP--&gt;&gt;Model: Standardized response
 </div>
 <hr/>
-<h2 id="3-mcp-architecture-client-server">3️⃣ MCP Architecture: Client &amp; Server<a class="headerlink" href="#3-mcp-architecture-client-server" title="Permanent link">¶</a></h2>
+<p><img alt="alt text" src="../image.png"/></p>
+<hr/>
+<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
+<p>If you forget everything else, remember this:</p>
+<blockquote>
+<p><strong>Think of MCP as a universal docking station for LLMs to connect with its tools.</strong></p>
+</blockquote>
+<hr/>
+<h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
+<ul>
+<li>Released in 2024 by Anthropic; quickly adopted by the community</li>
+<li>It is an open-source standard for connecting AI applications to external systems.</li>
+<li>Using MCP, AI applications like Claude or ChatGPT can connect to<ul>
+<li>data sources (e.g. local files, databases)</li>
+<li>tools (e.g. search engines, calculators)</li>
+<li>workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="mermaid">
+sequenceDiagram
+    participant Model
+    participant MCP
+    participant Tool1
+    participant Tool2
+    Model-&gt;&gt;MCP: Standardized request
+    MCP-&gt;&gt;Tool1: Invoke Tool1
+    MCP-&gt;&gt;Tool2: Invoke Tool2
+    Tool1--&gt;&gt;MCP: Response
+    Tool2--&gt;&gt;MCP: Response
+    MCP--&gt;&gt;Model: Standardized response
+</div>
+<hr/>
+<h2 id="mcp-architecture-client-server">MCP Architecture: Client &amp; Server<a class="headerlink" href="#mcp-architecture-client-server" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>MCP has three main components: <strong>Host (LLM)</strong>, <strong>Client</strong>, and <strong>Server (Tool)</strong>.  </p>
 </blockquote>
@@ -301,47 +336,241 @@ sequenceDiagram
 </tbody>
 </table>
 <hr/>
-<div class="mermaid">
-flowchart LR
-    A[AI Model / Host] --&gt;|Sends Intent| B[MCP Client]
-    B --&gt;|Standardized MCP Request| C[MCP Server]
-    C --&gt;|Executes Action| D[External Tool]
-    D --&gt; C
-    C --&gt;|Standardized Response| B
-    B --&gt;|Delivers Result| A
-</div>
-<ul>
-<li><strong>Host / Model</strong>: Knows what it wants to do (e.g., send an email).  </li>
-<li><strong>Client</strong>: Converts intent into an MCP request the server can understand.  </li>
-<li><strong>Server</strong>: Executes the request on the tool and sends back a standard response.  </li>
-</ul>
-<hr/>
-<h2 id="4-concrete-example-setting-a-reminder">4️⃣ Concrete Example: Setting a Reminder<a class="headerlink" href="#4-concrete-example-setting-a-reminder" title="Permanent link">¶</a></h2>
+<h2 id="concrete-example-setting-a-reminder">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
 </blockquote>
 <div class="mermaid">
 sequenceDiagram
     participant User
-    participant Host
-    participant Client
-    participant Server
+    participant LLM
+    participant MCPClient
+    participant MCPServer
     participant GCalendar
-    User-&gt;&gt;Host: "Set a reminder for 10 AM tomorrow"
-    Host-&gt;&gt;Client: Ask what tools are available
-    Client-&gt;&gt;Server: get_capabilities
-    Server--&gt;&gt;Client: List of tools (e.g. create_event)
-    Client--&gt;&gt;Host: Tool metadata returned
-    Host-&gt;&gt;Client: Generate MCP request (invoke create_event)
-    Client-&gt;&gt;Server: create_event request (time: 10 AM, title: reminder)
-    Server-&gt;&gt;GCalendar: Execute create event
-    GCalendar--&gt;&gt;Server: Event created
-    Server-&gt;&gt;Client: Success response
-    Client-&gt;&gt;Host: Return structured result
-    Host-&gt;&gt;User: "Reminder set for 10 AM tomorrow."
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
 </div>
 <hr/>
-<h2 id="5-why-this-matters-product-use-cases">5️⃣ Why This Matters: Product Use Cases<a class="headerlink" href="#5-why-this-matters-product-use-cases" title="Permanent link">¶</a></h2>
+<h2 id="concrete-example-setting-a-reminder_1">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_1" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_2">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_2" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_3">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_3" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_4">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_4" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_5">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_5" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_6">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_6" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_7">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_7" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer-&gt;&gt;GCalendar: Execute create event
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_8">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_8" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer-&gt;&gt;GCalendar: Execute create event
+    GCalendar--&gt;&gt;MCPServer: Event created
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_9">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_9" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer-&gt;&gt;GCalendar: Execute create event
+    GCalendar--&gt;&gt;MCPServer: Event created
+    MCPServer-&gt;&gt;MCPClient: Success response
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_10">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_10" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer-&gt;&gt;GCalendar: Execute create event
+    GCalendar--&gt;&gt;MCPServer: Event created
+    MCPServer-&gt;&gt;MCPClient: Success response
+    MCPClient-&gt;&gt;LLM: Return structured result
+</div>
+<hr/>
+<h2 id="concrete-example-setting-a-reminder_11">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_11" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
+</blockquote>
+<div class="mermaid">
+sequenceDiagram
+    participant User
+    participant LLM
+    participant MCPClient
+    participant MCPServer
+    participant GCalendar
+    User-&gt;&gt;LLM: "Set a reminder for 10 AM tomorrow"
+    LLM-&gt;&gt;MCPClient: Ask what tools are available
+    MCPClient-&gt;&gt;MCPServer: get_capabilities
+    MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
+    MCPClient--&gt;&gt;LLM: Tool metadata returned
+    LLM-&gt;&gt;MCPClient: Generate MCP request (invoke create_event)
+    MCPClient-&gt;&gt;MCPServer: create_event request (time: 10 AM, title: reminder)
+    MCPServer-&gt;&gt;GCalendar: Execute create event
+    GCalendar--&gt;&gt;MCPServer: Event created
+    MCPServer-&gt;&gt;MCPClient: Success response
+    MCPClient-&gt;&gt;LLM: Return structured result
+    LLM-&gt;&gt;User: "Reminder set for 10 AM tomorrow."
+</div>
+<hr/>
+<h2 id="why-this-matters-real-world-potential">Why This Matters: Real-World Potential<a class="headerlink" href="#why-this-matters-real-world-potential" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -352,26 +581,21 @@ sequenceDiagram
 </thead>
 <tbody>
 <tr>
-<td><strong>📩 Automating Email</strong></td>
-<td>AI sends, schedules, or drafts emails through Gmail</td>
-<td>Host (LLM) → Client → Gmail MCP Server</td>
+<td><strong>🧠 Unified AI Workspace</strong></td>
+<td>Connects tools like Notion, Slack, and Figma so your AI can summarize meetings, update project boards, and draft designs — all in one conversation.</td>
+<td>Host (LLM) → Client → Multi-tool MCP Servers</td>
 </tr>
 <tr>
-<td><strong>📊 Generating Reports</strong></td>
-<td>AI pulls data from multiple sources (Excel, Google Sheets, databases) and formats reports</td>
-<td>Host → Client → Tool MCP Servers (Sheets, DBs)</td>
-</tr>
-<tr>
-<td><strong>💬 Managing Chatbots</strong></td>
-<td>AI coordinates multi-platform chatbots (Slack, WhatsApp, internal tools) seamlessly</td>
-<td>Host → Client → Chat Platforms MCP Servers</td>
+<td><strong>🏙️ Smart City Dashboards</strong></td>
+<td>City AIs can pull live data from transport, weather, and energy systems to generate insights or alerts — no manual API wiring needed.</td>
+<td>Host → Client → IoT / Gov Data MCP Servers</td>
 </tr>
 </tbody>
 </table>
 <hr/>
-<h2 id="5-whats-next">5️⃣ What's next?<a class="headerlink" href="#5-whats-next" title="Permanent link">¶</a></h2>
+<h2 id="thats-it-for-the-presentation-whats-next">That's it for the presentation. What's next?<a class="headerlink" href="#thats-it-for-the-presentation-whats-next" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>We’ll go into detail on <a href="example"><strong>email automation</strong></a>, which demonstrates the full MCP flow in a simple example.</p>
+<p>If you're interested check out the full MCP flow in more detail with this <a href="example">example</a>, or head back to the <a href="/">homepage</a>.</p>
 </blockquote>
 </article>
 </div>
