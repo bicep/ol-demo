@@ -400,8 +400,8 @@ sequenceDiagram
 
 | Use Case | How MCP Applies | MCP Components Involved |
 |-----------|----------------|--------------------------|
-| **🧠 Unified AI Workspace** | Connects tools like Notion, Slack, and Figma so your AI can summarize meetings, update project boards, and draft designs — all in one conversation. | Host (LLM) → Client → Multi-tool MCP Servers |
-| **🏙️ Smart City Dashboards** | City AIs can pull live data for city population, transportation, weather, and energy systems to generate insights or alerts | Host (LLM) → Client → Sensor / Closed sourced research/Gov DB MCP Servers |
+| **🧠 Unified AI Workspace** | Connects tools like Notion, Slack, and Figma so your AI can summarize meetings, update project boards, and draft designs — all in one conversation. | Host (LLM) → MCP Client → Multi-tool MCP Servers |
+| **🏙️ Smart City Dashboards** | City AIs can pull live data for city population, transportation, weather, and building systems to generate insights or alerts | Host (LLM) → MCP Client → Sensor + Closed sourced research/Gov DB MCP Servers |
 
 ---
 
