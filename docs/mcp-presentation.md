@@ -52,7 +52,8 @@ If you forget everything else, remember this:
 - External systems include:
     - tools (e.g. Gmail, slack, etc)
     - data sources (e.g. local files, databases)
-    - workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
+    - workflows (e.g. specialized prompts)
+- Goal: enabling them to access key information and perform specialized tasks.
 
 ---
 
