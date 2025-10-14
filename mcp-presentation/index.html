@@ -398,6 +398,38 @@ sequenceDiagram
     MCPServer--&gt;&gt;MCPClient: List of tools (e.g. create_event)
 </div>
 <hr/>
+<h2 id="example-tool-list-and-metadata">Example: Tool List and Metadata<a class="headerlink" href="#example-tool-list-and-metadata" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"tools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create_event"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creates a new event in Google Calendar."</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"input_schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Event title"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Start time (ISO 8601)"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duration of the event"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">          </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional event location"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"title"</span><span class="p">,</span><span class="w"> </span><span class="s2">"time"</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delete_event"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deletes an event by ID from Google Calendar."</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"input_schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unique identifier of the event"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"event_id"</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr/>
 <h2 id="concrete-example-setting-a-reminder_4">Concrete Example: Setting a Reminder<a class="headerlink" href="#concrete-example-setting-a-reminder_4" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>Imagine your AI wants to set a reminder for you via Google Calendar.</p>
@@ -567,7 +599,7 @@ sequenceDiagram
     GCalendar--&gt;&gt;MCPServer: Event created
     MCPServer-&gt;&gt;MCPClient: Success response
     MCPClient-&gt;&gt;LLM: Return structured result
-    LLM-&gt;&gt;User: "Reminder set for 10 AM tomorrow."
+    LLM-&gt;&gt;User: "Sure! Reminder set for 10 AM tomorrow :)"
 </div>
 <hr/>
 <h2 id="why-this-matters-real-world-potential">Why This Matters: Real-World Potential<a class="headerlink" href="#why-this-matters-real-world-potential" title="Permanent link">¶</a></h2>
