@@ -57,7 +57,8 @@ If you forget everything else, remember this:
 
 ---
 
-## The Problem
+## Before MCP
+
 Modern AI tools often act in isolation — each with their own APIs and context limits.  
 
 <div class="mermaid">
@@ -71,9 +72,7 @@ sequenceDiagram
 
 ---
 
-## How MCP Solves the Problem
-
-At its heart, MCP defines a shared protocol for how large language models communicate with its tools
+## After MCP
 
 <div class="mermaid">
 sequenceDiagram
