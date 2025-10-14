@@ -188,6 +188,42 @@ sequenceDiagram
 
 ---
 
+## Example: Tool List and Metadata
+
+```json
+{
+  "tools": [
+    {
+      "name": "create_event",
+      "description": "Creates a new event in Google Calendar.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "description": "Event title" },
+          "time": { "type": "string", "description": "Start time (ISO 8601)" },
+          "duration": { "type": "string", "description": "Duration of the event" },
+          "location": { "type": "string", "description": "Optional event location" }
+        },
+        "required": ["title", "time"]
+      }
+    },
+    {
+      "name": "delete_event",
+      "description": "Deletes an event by ID from Google Calendar.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string", "description": "Unique identifier of the event" }
+        },
+        "required": ["event_id"]
+      }
+    }
+  ]
+}
+```
+
+---
+
 ## Concrete Example: Setting a Reminder
 
 > Imagine your AI wants to set a reminder for you via Google Calendar.
@@ -371,7 +407,7 @@ sequenceDiagram
     GCalendar-->>MCPServer: Event created
     MCPServer->>MCPClient: Success response
     MCPClient->>LLM: Return structured result
-    LLM->>User: "Reminder set for 10 AM tomorrow."
+    LLM->>User: "Sure! Reminder set for 10 AM tomorrow :)"
 </div>
 
 ---
