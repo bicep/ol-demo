@@ -194,20 +194,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#the-problem">
-<span class="md-ellipsis">
-      The Problem
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#how-mcp-solves-the-problem">
-<span class="md-ellipsis">
-      How MCP Solves the Problem
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#the-core-idea">
 <span class="md-ellipsis">
       🎯 The Core Idea
@@ -257,6 +243,26 @@ p > img {
 </tbody>
 </table>
 <hr/>
+<p><img alt="alt text" src="../image.png"/></p>
+<hr/>
+<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
+<p>If you forget everything else, remember this:</p>
+<blockquote>
+<p><strong>Think of MCP as a universal docking station for LLMs to connect with its tools.</strong></p>
+</blockquote>
+<hr/>
+<h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
+<ul>
+<li>Released in 2024 by Anthropic; quickly adopted by the community</li>
+<li>It is an open-source standard for connecting AI applications (Claude, ChatGPT) to external systems.</li>
+<li>External systems include:<ul>
+<li>tools (e.g. Gmail, slack, etc)</li>
+<li>data sources (e.g. local files, databases)</li>
+<li>workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.</li>
+</ul>
+</li>
+</ul>
+<hr/>
 <h2 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">¶</a></h2>
 <p>Modern AI tools often act in isolation — each with their own APIs and context limits.  </p>
 <div class="mermaid">
@@ -270,40 +276,6 @@ sequenceDiagram
 <hr/>
 <h2 id="how-mcp-solves-the-problem">How MCP Solves the Problem<a class="headerlink" href="#how-mcp-solves-the-problem" title="Permanent link">¶</a></h2>
 <p>At its heart, MCP defines a shared protocol for how large language models communicate with its tools</p>
-<div class="mermaid">
-sequenceDiagram
-    participant Model
-    participant MCP
-    participant Tool1
-    participant Tool2
-    Model-&gt;&gt;MCP: Standardized request
-    MCP-&gt;&gt;Tool1: Invoke Tool1
-    MCP-&gt;&gt;Tool2: Invoke Tool2
-    Tool1--&gt;&gt;MCP: Response
-    Tool2--&gt;&gt;MCP: Response
-    MCP--&gt;&gt;Model: Standardized response
-</div>
-<hr/>
-<p><img alt="alt text" src="../image.png"/></p>
-<hr/>
-<h2 id="the-core-idea">🎯 The Core Idea<a class="headerlink" href="#the-core-idea" title="Permanent link">¶</a></h2>
-<p>If you forget everything else, remember this:</p>
-<blockquote>
-<p><strong>Think of MCP as a universal docking station for LLMs to connect with its tools.</strong></p>
-</blockquote>
-<hr/>
-<h1 id="understanding-mcp">Understanding MCP<a class="headerlink" href="#understanding-mcp" title="Permanent link">¶</a></h1>
-<ul>
-<li>Released in 2024 by Anthropic; quickly adopted by the community</li>
-<li>It is an open-source standard for connecting AI applications to external systems.</li>
-<li>Using MCP, AI applications like Claude or ChatGPT can connect to<ul>
-<li>data sources (e.g. local files, databases)</li>
-<li>tools (e.g. search engines, calculators)</li>
-<li>workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.</li>
-</ul>
-</li>
-</ul>
-<hr/>
 <div class="mermaid">
 sequenceDiagram
     participant Model
