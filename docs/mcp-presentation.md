@@ -34,6 +34,28 @@ p > img {
 
 ---
 
+![alt text](image.png)
+
+---
+
+## 🎯 The Core Idea
+If you forget everything else, remember this:
+
+> **Think of MCP as a universal docking station for LLMs to connect with its tools.**
+
+---
+
+# Understanding MCP
+
+- Released in 2024 by Anthropic; quickly adopted by the community
+- It is an open-source standard for connecting AI applications (Claude, ChatGPT) to external systems.
+- External systems include:
+    - tools (e.g. Gmail, slack, etc)
+    - data sources (e.g. local files, databases)
+    - workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
+
+---
+
 ## The Problem
 Modern AI tools often act in isolation — each with their own APIs and context limits.  
 
@@ -51,44 +73,6 @@ sequenceDiagram
 ## How MCP Solves the Problem
 
 At its heart, MCP defines a shared protocol for how large language models communicate with its tools
-
-<div class="mermaid">
-sequenceDiagram
-    participant Model
-    participant MCP
-    participant Tool1
-    participant Tool2
-    Model->>MCP: Standardized request
-    MCP->>Tool1: Invoke Tool1
-    MCP->>Tool2: Invoke Tool2
-    Tool1-->>MCP: Response
-    Tool2-->>MCP: Response
-    MCP-->>Model: Standardized response
-</div>
-
----
-
-![alt text](image.png)
-
----
-
-## 🎯 The Core Idea
-If you forget everything else, remember this:
-
-> **Think of MCP as a universal docking station for LLMs to connect with its tools.**
-
----
-
-# Understanding MCP
-
-- Released in 2024 by Anthropic; quickly adopted by the community
-- It is an open-source standard for connecting AI applications to external systems.
-- Using MCP, AI applications like Claude or ChatGPT can connect to
-    - data sources (e.g. local files, databases)
-    - tools (e.g. search engines, calculators)
-    - workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.
-
----
 
 <div class="mermaid">
 sequenceDiagram
