@@ -407,4 +407,4 @@ sequenceDiagram
 
 ## That's it for the presentation. What's next?
 
-> If you're interested check out the full MCP flow in more detail with this [example](example), or head back to the [homepage](/).
+> If you're interested check out the full MCP flow in more detail with this [example](example), or head back to the [homepage](/ol-demo).
